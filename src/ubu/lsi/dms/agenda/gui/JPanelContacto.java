@@ -1,14 +1,20 @@
 package ubu.lsi.dms.agenda.gui;
 
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class JPanelContacto extends JPanel {
+public class JPanelContacto extends JPanelDato {
 	
-	JLabel[] etiquetas = new JLabel[19]; 
+	private JLabel[] etiquetas = new JLabel[19];
+	
 	
 	public JPanelContacto(){
+		super();
 		etiquetas[0] = new JLabel("Id");
 		etiquetas[1] = new JLabel("Nombre");
 		etiquetas[2] = new JLabel("Apellidos");
@@ -29,8 +35,34 @@ public class JPanelContacto extends JPanel {
 		etiquetas[17] = new JLabel("Tipo de Contacto");
 		etiquetas[18] = new JLabel("Notas");
 		
-		for(int i = 0; i < etiquetas.length; i++){
+		campoTexto.add(new JTextField("Id"));
+		campoTexto.add(new JTextField("Nombre"));
+		campoTexto.add(new JTextField("Apellidos"));
+		campoTexto.add(new JTextField("Estimado"));
+		campoTexto.add(new JTextField("Direccion"));
+		campoTexto.add(new JTextField("Ciudad"));
+		campoTexto.add(new JTextField("Prov"));
+		campoTexto.add(new JTextField("Codigo postal"));
+		campoTexto.add(new JTextField("Region"));
+		campoTexto.add(new JTextField("Pais"));
+		campoTexto.add(new JTextField("Nombre de la compania"));
+		campoTexto.add(new JTextField("Cargo"));
+		campoTexto.add(new JTextField("Telefono del trabajo"));
+		campoTexto.add(new JTextField("Extension del trabajo"));
+		campoTexto.add(new JTextField("Telefono movil"));
+		campoTexto.add(new JTextField("Numero de fax"));
+		campoTexto.add(new JTextField("E-mail"));
+		campoTexto.add(new JTextField("Tipo de Contacto"));
+		campoTexto.add(new JTextField("Notas"));
+		
+		add(etiquetas[0]);
+		add(comboId);
+		for(int i = 1; i < etiquetas.length; i++){
 			this.add(etiquetas[i]);
+			add(campoTexto.get(i - 1));
 		}
+		add(botonAceptar);
+		setLayout(new GridLayout(10,2));
 	}
+	
 }

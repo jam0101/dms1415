@@ -1,7 +1,10 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,9 +25,13 @@ public class JFrameFormulario extends JFrame {
 		setLayout(new FlowLayout());
 		setSize(800, 600);
 		setLocation(400, 200);
-		setResizable(false);
+		//setResizable(false);
 		
 		inicializarComponentes();
+	}
+	
+	public JTabbedPane getTabbedPane(){
+		return tabbedPane;
 	}
 	
 	
@@ -33,6 +40,22 @@ public class JFrameFormulario extends JFrame {
 		
 		tabbedPane.addTab("Contacto", panelContacto);
 		tabbedPane.addTab("Llamada", panelLlamada);
-		tabbedPane.addTab("Tipo de Contacto", panelTipoContacto);		
+		tabbedPane.addTab("Tipo de Contacto", panelTipoContacto);
+	
+		
+		JButton botonCerrar = new JButton("Cerrar");
+		this.add(botonCerrar);
+		botonCerrar.addMouseListener(new EscuchadorBotonCerrar());
+	}
+	
+	
+	private class EscuchadorBotonCerrar extends MouseAdapter{
+		
+		@Override
+		public void mouseClicked(MouseEvent evento) {
+			JFrameFormulario.this.dispose();
+			new JFrameMenu("Menu");
+		}
+		
 	}
 }

@@ -2,7 +2,7 @@ package ubu.lsi.dms.agenda.gui.mediador;
 
 import javax.swing.JTextField;
 
-public class MediadorConsulta extends Mediador{
+public class MediadorConsulta extends Mediador {
 
 	@Override
 	public void actualizarColegas() {
@@ -13,5 +13,11 @@ public class MediadorConsulta extends Mediador{
 		
 		getBotonAceptar().setVisible(false);
 	}
+	
+	
+	@Override
+	 public Mediador clone()   {
+	      return new MediadorConsulta();
+	 }
 
 }

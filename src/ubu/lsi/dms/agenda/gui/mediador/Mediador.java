@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 
-public abstract class Mediador {
+public abstract class Mediador implements Cloneable {
 
 	private JComboBox<Integer> comboId;
 	private ArrayList<CampoTexto> camposTexto;
@@ -38,4 +39,8 @@ public abstract class Mediador {
 	
 	
 	public abstract void actualizarColegas();
+	
+	@Override
+	public abstract Mediador clone();
+	
 }

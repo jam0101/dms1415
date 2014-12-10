@@ -18,5 +18,10 @@ public class MediadorInsertar extends Mediador {
 		
 		getBotonAceptar().setEnabled(todosLosCamposEstanCorrectos);
 	}
-
+	
+	
+	@Override
+	 public Mediador clone()   {
+	      return new MediadorInsertar();
+	 }
 }

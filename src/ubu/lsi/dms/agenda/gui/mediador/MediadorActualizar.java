@@ -21,7 +21,11 @@ public class MediadorActualizar extends Mediador {
 		}
 		
 		getBotonAceptar().setEnabled(todosLosCamposEstanCorrectos);
-		
 	}
-
+	
+	
+	@Override
+	 public Mediador clone()   {
+	      return new MediadorActualizar();
+	 }
 }

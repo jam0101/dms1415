@@ -4,13 +4,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import ubu.lsi.dms.agenda.gui.campoTexto.*;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JPanelLlamada extends JPanelDato {
 	private JLabel[] etiquetas = new JLabel[5];
-	private JButton botonAceptar = new JButton("Aceptar");
 	
 	public JPanelLlamada(Mediador mediador){
 		super(mediador);
@@ -29,9 +29,15 @@ public class JPanelLlamada extends JPanelDato {
 		add(comboId);
 		for(int i = 1; i < etiquetas.length; i++){
 			this.add(etiquetas[i]);
+			
 			add(campoTexto.get(i - 1));
+			campoTexto.get(i - 1).getDocument().addDocumentListener(new ListenerFormulario());
 		}
 		add(botonAceptar);
+		botonAceptar.setText("Aceptar (Llamada)");
+		
 		setLayout(new GridLayout(2,2));
+		
+		mediador.actualizarColegas();
 	}
 }

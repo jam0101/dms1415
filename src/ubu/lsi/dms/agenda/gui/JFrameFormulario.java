@@ -6,12 +6,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
-import ubu.lsi.dms.agenda.gui.mediador.MediadorActualizar;
 
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
@@ -31,9 +28,10 @@ public class JFrameFormulario extends JFrame {
 		//setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		panelContacto = new JPanelContacto(mediador);
-		panelLlamada = new JPanelLlamada(mediador);
-		panelTipoContacto = new JPanelTipoContacto(mediador);
+		System.out.println("JFrameFormulario: " + mediador.getClass().getCanonicalName());
+		panelContacto = new JPanelContacto(mediador.clone());
+		panelLlamada = new JPanelLlamada(mediador.clone());
+		panelTipoContacto = new JPanelTipoContacto(mediador.clone());
 		
 		inicializarComponentes();
 	}

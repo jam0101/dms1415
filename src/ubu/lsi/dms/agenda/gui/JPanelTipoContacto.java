@@ -28,5 +28,6 @@ public class JPanelTipoContacto extends JPanelDato {
 		}
 		add(botonAceptar);
 		setLayout(new GridLayout(2,2));
+		
 	}
 }

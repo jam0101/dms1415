@@ -19,7 +19,8 @@ public class JFrameMenu extends JFrame {
 		setLayout(new FlowLayout());
 		setSize(800, 600);
 		setLocation(400, 200);
-		setResizable(false);
+//		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.getContentPane().add(new JPanelBotones());
 

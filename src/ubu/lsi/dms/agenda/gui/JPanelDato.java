@@ -16,7 +16,6 @@ public abstract class JPanelDato extends JPanel{
 	protected JButton botonAceptar = new JButton("Aceptar");
 	
 	protected Mediador mediador;
-
 	
 	public JPanelDato(Mediador mediador){
 		this.mediador = mediador;

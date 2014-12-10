@@ -6,9 +6,12 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.mediador.MediadorActualizar;
 
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
@@ -26,12 +29,13 @@ public class JFrameFormulario extends JFrame {
 		setSize(800, 600);
 		setLocation(400, 200);
 		//setResizable(false);
-		
-		inicializarComponentes();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panelContacto = new JPanelContacto(mediador);
 		panelLlamada = new JPanelLlamada(mediador);
 		panelTipoContacto = new JPanelTipoContacto(mediador);
+		
+		inicializarComponentes();
 	}
 	
 	public JTabbedPane getTabbedPane(){
@@ -45,7 +49,6 @@ public class JFrameFormulario extends JFrame {
 		tabbedPane.addTab("Contacto", panelContacto);
 		tabbedPane.addTab("Llamada", panelLlamada);
 		tabbedPane.addTab("Tipo de Contacto", panelTipoContacto);
-	
 		
 		JButton botonCerrar = new JButton("Cerrar");
 		this.add(botonCerrar);

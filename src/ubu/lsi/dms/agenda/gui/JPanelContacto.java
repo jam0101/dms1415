@@ -3,6 +3,9 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import ubu.lsi.dms.agenda.gui.campoTexto.*;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
@@ -10,7 +13,6 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 public class JPanelContacto extends JPanelDato {
 	
 	private JLabel[] etiquetas = new JLabel[19];
-	
 	
 	public JPanelContacto(Mediador mediador){
 		super(mediador);
@@ -57,11 +59,34 @@ public class JPanelContacto extends JPanelDato {
 		add(etiquetas[0]);
 		add(comboId);
 		for(int i = 1; i < etiquetas.length; i++){
-			this.add(etiquetas[i]);
+			add(etiquetas[i]);
 			add(campoTexto.get(i - 1));
+			
+			campoTexto.get(i - 1).getDocument().addDocumentListener(new ListenerFormulario()); 
 		}
 		add(botonAceptar);
 		setLayout(new GridLayout(10,2));
 	}
+	
+	
+	private class ListenerFormulario implements DocumentListener { 
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			mediador.actualizarColegas();
+		}
+		
+		
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			mediador.actualizarColegas();
+		}
+		
+		
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			mediador.actualizarColegas();
+		}
+    }
 	
 }

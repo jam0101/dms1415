@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ubu.lsi.dms.agenda.gui.mediador.*;
+
 @SuppressWarnings("serial")
 public class JFrameMenu extends JFrame {
 
@@ -42,38 +44,38 @@ public class JFrameMenu extends JFrame {
 			botones[2].addMouseListener(new EscuchadorBotonActualizar());
 		}
 
+		
+		
 		private class EscuchadorBotonInsertar extends MouseAdapter {
 
 			@Override
 			public void mouseClicked(MouseEvent evento) {
 				JFrameMenu.this.dispose();
-				JFrameFormulario frameFormulario = new JFrameFormulario(
-						"Insertar");
-
+				new JFrameFormulario("Insertar", new MediadorInsertar());
 			}
 
 		}
 
+		
+		
 		private class EscuchadorBotonConsultar extends MouseAdapter {
 
 			@Override
 			public void mouseClicked(MouseEvent evento) {
 				JFrameMenu.this.dispose();
-				JFrameFormulario frameFormulario = new JFrameFormulario(
-						"Consultar");
-
+				new JFrameFormulario("Consultar", new MediadorConsulta());
 			}
 
 		}
 
+		
+		
 		private class EscuchadorBotonActualizar extends MouseAdapter {
 
 			@Override
 			public void mouseClicked(MouseEvent evento) {
 				JFrameMenu.this.dispose();
-				JFrameFormulario frameFormulario = new JFrameFormulario(
-						"Actualizar");
-
+				new JFrameFormulario("Actualizar", new MediadorActualizar());
 			}
 
 		}

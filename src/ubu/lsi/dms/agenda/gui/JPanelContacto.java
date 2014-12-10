@@ -2,10 +2,9 @@ package ubu.lsi.dms.agenda.gui;
 
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import ubu.lsi.dms.agenda.gui.campoTexto.*;
+import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JPanelContacto extends JPanelDato {
@@ -13,8 +12,8 @@ public class JPanelContacto extends JPanelDato {
 	private JLabel[] etiquetas = new JLabel[19];
 	
 	
-	public JPanelContacto(){
-		super();
+	public JPanelContacto(Mediador mediador){
+		super(mediador);
 		etiquetas[0] = new JLabel("Id");
 		etiquetas[1] = new JLabel("Nombre");
 		etiquetas[2] = new JLabel("Apellidos");
@@ -35,25 +34,25 @@ public class JPanelContacto extends JPanelDato {
 		etiquetas[17] = new JLabel("Tipo de Contacto");
 		etiquetas[18] = new JLabel("Notas");
 		
-		campoTexto.add(new JTextField("Id"));
-		campoTexto.add(new JTextField("Nombre"));
-		campoTexto.add(new JTextField("Apellidos"));
-		campoTexto.add(new JTextField("Estimado"));
-		campoTexto.add(new JTextField("Direccion"));
-		campoTexto.add(new JTextField("Ciudad"));
-		campoTexto.add(new JTextField("Prov"));
-		campoTexto.add(new JTextField("Codigo postal"));
-		campoTexto.add(new JTextField("Region"));
-		campoTexto.add(new JTextField("Pais"));
-		campoTexto.add(new JTextField("Nombre de la compania"));
-		campoTexto.add(new JTextField("Cargo"));
-		campoTexto.add(new JTextField("Telefono del trabajo"));
-		campoTexto.add(new JTextField("Extension del trabajo"));
-		campoTexto.add(new JTextField("Telefono movil"));
-		campoTexto.add(new JTextField("Numero de fax"));
-		campoTexto.add(new JTextField("E-mail"));
-		campoTexto.add(new JTextField("Tipo de Contacto"));
-		campoTexto.add(new JTextField("Notas"));
+		campoTexto.add(new Campo_SoloDigitos("Id"));
+		campoTexto.add(new Campo_SoloLetras("Nombre"));
+		campoTexto.add(new Campo_SoloLetras("Apellidos"));
+		campoTexto.add(new Campo_SoloLetras("Estimado"));
+		campoTexto.add(new Campo_Direccion("Direccion"));
+		campoTexto.add(new Campo_SoloLetras("Ciudad"));
+		campoTexto.add(new Campo_SoloLetras("Prov"));
+		campoTexto.add(new Campo_CodPostal("Codigo postal"));
+		campoTexto.add(new Campo_SoloLetras("Region"));
+		campoTexto.add(new Campo_SoloLetras("Pais"));
+		campoTexto.add(new Campo_SoloLetras("Nombre de la compania"));
+		campoTexto.add(new Campo_SoloLetras("Cargo"));
+		campoTexto.add(new Campo_SoloDigitos("Telefono del trabajo"));
+		campoTexto.add(new Campo_SoloLetras("Extension del trabajo"));
+		campoTexto.add(new Campo_SoloDigitos("Telefono movil"));
+		campoTexto.add(new Campo_SoloDigitos("Numero de fax"));
+		campoTexto.add(new Campo_Email("E-mail"));
+		campoTexto.add(new Campo_SoloDigitos("Tipo de Contacto"));
+		campoTexto.add(new Campo_Notas("Notas"));
 		
 		add(etiquetas[0]);
 		add(comboId);

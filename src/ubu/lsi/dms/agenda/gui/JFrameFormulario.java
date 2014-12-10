@@ -6,20 +6,20 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
 	
 	JTabbedPane tabbedPane = new JTabbedPane();
-	JPanelContacto panelContacto = new JPanelContacto();
-	JPanelLlamada panelLlamada = new JPanelLlamada();
-	JPanelTipoContacto panelTipoContacto = new JPanelTipoContacto();
+	JPanelContacto panelContacto;
+	JPanelLlamada panelLlamada;
+	JPanelTipoContacto panelTipoContacto;
 	
 	
-	public JFrameFormulario(String nombre){
+	public JFrameFormulario(String nombre, Mediador mediador){
 		super(nombre);
 		setVisible(true);
 		setLayout(new FlowLayout());
@@ -28,6 +28,10 @@ public class JFrameFormulario extends JFrame {
 		//setResizable(false);
 		
 		inicializarComponentes();
+		
+		panelContacto = new JPanelContacto(mediador);
+		panelLlamada = new JPanelLlamada(mediador);
+		panelTipoContacto = new JPanelTipoContacto(mediador);
 	}
 	
 	public JTabbedPane getTabbedPane(){

@@ -9,8 +9,9 @@ public class Campo_Email extends CampoTexto {
 
 	@Override
 	public boolean estaCorrecto() {
-		// TODO
-		return false;
+		String cadenaCorrectaParaUnEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+		
+		return getText().matches(cadenaCorrectaParaUnEmail);
 	}
 
 }

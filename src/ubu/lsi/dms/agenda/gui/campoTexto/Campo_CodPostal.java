@@ -14,13 +14,13 @@ public class Campo_CodPostal extends CampoTexto {
 		if (listaCaracteres.length != 5) {
 			return false;
 		}
-		
-		for(Character c : this.getText().toCharArray()){
-			if(!Character.isDigit(c)){
+
+		for (Character c : this.getText().toCharArray()) {
+			if (!Character.isDigit(c)) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 

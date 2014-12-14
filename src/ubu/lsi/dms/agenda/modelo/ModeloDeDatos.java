@@ -81,7 +81,6 @@ public class ModeloDeDatos {
 		Llamada l6 = new Llamada(6, c5, "2014-3-30 10:66:00", "reunion",
 				"lunes 15 a las 10:00");
 
-		
 		Llamada l7 = new Llamada(8, c5, "2001-3-30 10:66:00", "reunion",
 				"lunes 15 a las 10:00");
 		Llamada l8 = new Llamada(9, c5, "2002-3-30 10:66:00", "reunion",
@@ -94,7 +93,7 @@ public class ModeloDeDatos {
 				"lunes 15 a las 10:00");
 		Llamada l12 = new Llamada(7, c5, "2000-3-30 10:66:00", "reunion",
 				"lunes 15 a las 10:00");
-		
+
 		llamadas.add(l1);
 		llamadas.add(l2);
 		llamadas.add(l3);

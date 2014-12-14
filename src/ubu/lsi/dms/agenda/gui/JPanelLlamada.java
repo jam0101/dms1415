@@ -1,43 +1,65 @@
 package ubu.lsi.dms.agenda.gui;
 
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import ubu.lsi.dms.agenda.gui.campoTexto.*;
+import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Fecha;
+import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Notas;
+import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
+import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloLetras;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JPanelLlamada extends JPanelDato {
 	private JLabel[] etiquetas = new JLabel[5];
-	
-	public JPanelLlamada(Mediador mediador){
+
+	public JPanelLlamada(Mediador mediador) {
 		super(mediador);
-		etiquetas[0] = new JLabel("IdLlamada");
-		etiquetas[1] = new JLabel("IdContacto");
-		etiquetas[2] = new JLabel("FechaLlamada");
-		etiquetas[3] = new JLabel("Asunto");
-		etiquetas[4] = new JLabel("Notas");
-		
-		campoTexto.add(new Campo_SoloDigitos("IdContacto"));
-		campoTexto.add(new Campo_Fecha("FechaLlamada"));
-		campoTexto.add(new Campo_SoloLetras("Asunto"));
-		campoTexto.add(new Campo_Notas("Notas"));
-		
-		add(etiquetas[0]);
-		add(comboId);
-		for(int i = 1; i < etiquetas.length; i++){
-			this.add(etiquetas[i]);
-			
-			add(campoTexto.get(i - 1));
-			campoTexto.get(i - 1).getDocument().addDocumentListener(new ListenerFormulario());
+
+		setLayout(new GridBagLayout());
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.insets = new Insets(10, 10, 10, 10);
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+		etiquetas[0] = crearLabel("IdLlamada");
+		etiquetas[1] = crearLabel("IdContacto");
+		etiquetas[2] = crearLabel("FechaLlamada");
+		etiquetas[3] = crearLabel("Asunto");
+		etiquetas[4] = crearLabel("Notas");
+
+		campoTexto.add(new Campo_SoloDigitos(""));
+		campoTexto.add(new Campo_SoloDigitos(""));
+		campoTexto.add(new Campo_Fecha(""));
+		campoTexto.add(new Campo_SoloLetras(""));
+		campoTexto.add(new Campo_Notas(""));
+
+		// add(comboId);
+		c.gridx = 0;
+		c.gridy = 0;
+		for (int i = 0; i < etiquetas.length; i++) {
+			add(etiquetas[i], c);
+			c.gridx++;
+
+			campoTexto.get(i).getDocument()
+					.addDocumentListener(new ListenerFormulario());
+			add(campoTexto.get(i), c);
+			c.gridx++;
+
+			if (i % 2 != 0) {
+				c.gridy++;
+				c.gridx = 0;
+			}
 		}
-		add(botonAceptar);
+
+		c.gridx++;
+		c.gridy++;
 		botonAceptar.setText("Aceptar (Llamada)");
-		
-		setLayout(new GridLayout(2,2));
-		
+		add(botonAceptar, c);
+
 		mediador.actualizarColegas();
 	}
 }

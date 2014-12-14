@@ -10,17 +10,17 @@ public class Campo_SoloLetras extends CampoTexto {
 	@Override
 	public boolean estaCorrecto() {
 		char[] listaCaracteres = this.getText().toCharArray();
-		
-		if (listaCaracteres.length == 0){
+
+		if (listaCaracteres.length == 0) {
 			return false;
 		}
-		
-		for(Character c : listaCaracteres){
-			if(!Character.isAlphabetic(c)){
+
+		for (Character c : listaCaracteres) {
+			if (!Character.isAlphabetic(c)) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 

@@ -10,17 +10,17 @@ public class Campo_SoloDigitos extends CampoTexto {
 	@Override
 	public boolean estaCorrecto() {
 		char[] listaCaracteres = this.getText().toCharArray();
-		
-		if (listaCaracteres.length == 0){
+
+		if (listaCaracteres.length == 0) {
 			return false;
 		}
-		
-		for(Character c : this.getText().toCharArray()){
-			if(!Character.isDigit(c)){
+
+		for (Character c : this.getText().toCharArray()) {
+			if (!Character.isDigit(c)) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 

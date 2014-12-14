@@ -1,6 +1,8 @@
 package ubu.lsi.dms.agenda.gui;
 
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 
@@ -10,28 +12,43 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
 	private JLabel[] etiquetas = new JLabel[2];
-	
-	public JPanelTipoContacto(Mediador mediador){
+
+	public JPanelTipoContacto(Mediador mediador) {
 		super(mediador);
-		etiquetas[0] = new JLabel("IdTipoContacto");
-		etiquetas[1] = new JLabel("TipoContacto");
+
+		setLayout(new GridBagLayout());
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.insets = new Insets(10, 10, 10, 10);
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+		c.gridx = 0;
+		c.gridy = 0;
+		etiquetas[0] = crearLabel("IdTipoContacto");
+		add(etiquetas[0], c);
 		
-		campoTexto.add(new Campo_SoloDigitos("IdTipoContacto"));
-		campoTexto.add(new Campo_SoloDigitos("TipoContacto"));
+		c.gridx = 0;
+		c.gridy = 1;
+		etiquetas[0] = crearLabel("TipoContacto");
+		add(etiquetas[0], c);
+
+		campoTexto.add(new Campo_SoloDigitos(""));
+		campoTexto.add(new Campo_SoloDigitos(""));
 		
-		add(etiquetas[0]);
-		add(comboId);
-		for(int i = 1; i < etiquetas.length; i++){
-			this.add(etiquetas[i]);
-			
-			add(campoTexto.get(i - 1));
-			campoTexto.get(i - 1).getDocument().addDocumentListener(new ListenerFormulario());
-		}
-		add(botonAceptar);
-		botonAceptar.setText("Aceptar (Tipo Contacto)");
+		c.gridx = 1;
+		c.gridy = 0;
+		add(campoTexto.get(0), c);
 		
-		setLayout(new GridLayout(2,2));
+		c.gridx = 1;
+		c.gridy = 1;
+		add(campoTexto.get(1), c);
+
+		// add(comboId);
 		
+		c.gridx = 1;
+		c.gridy = 2;
+		add(botonAceptar, c);
+
 		mediador.actualizarColegas();
 	}
 }

@@ -1,6 +1,5 @@
 package ubu.lsi.dms.agenda.gui.campoTexto;
 
-
 @SuppressWarnings("serial")
 public class Campo_Notas extends CampoTexto {
 
@@ -10,7 +9,8 @@ public class Campo_Notas extends CampoTexto {
 
 	@Override
 	public boolean estaCorrecto() {
-		return true;	//El campo Notas está bien siempre. Incluso si no tiene nada.
+		return true; // El campo Notas está bien siempre. Incluso si no tiene
+						// nada.
 	}
 
 }

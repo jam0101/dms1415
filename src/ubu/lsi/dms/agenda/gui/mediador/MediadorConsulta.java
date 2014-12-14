@@ -9,6 +9,7 @@ public class MediadorConsulta extends Mediador {
 		
 		for(JTextField campo : getCamposTexto()){
 			campo.setEnabled(false);
+			campo.setVisible(false);
 		}
 		
 		getBotonAceptar().setVisible(false);

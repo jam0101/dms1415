@@ -1,66 +1,85 @@
 package ubu.lsi.dms.agenda.gui;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
-	
+
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanelContacto panelContacto;
 	JPanelLlamada panelLlamada;
 	JPanelTipoContacto panelTipoContacto;
-	
-	
-	public JFrameFormulario(String nombre, Mediador mediador){
+
+	public JFrameFormulario(String nombre, Mediador mediador) {
 		super(nombre);
 		setVisible(true);
 		setLayout(new FlowLayout());
-		setSize(800, 600);
-		setLocation(400, 200);
-		//setResizable(false);
+		setSize(950, 610);
+		setMinimumSize(new Dimension(950, 610));
+		// Para que aparezca centrado
+		setLocationRelativeTo(null);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		System.out.println("JFrameFormulario: " + mediador.getClass().getCanonicalName());
+
+		System.out.println("JFrameFormulario: "
+				+ mediador.getClass().getCanonicalName());
 		panelContacto = new JPanelContacto(mediador.clone());
 		panelLlamada = new JPanelLlamada(mediador.clone());
 		panelTipoContacto = new JPanelTipoContacto(mediador.clone());
+
+		inicializacionComponentes();
 		
-		inicializarComponentes();
 	}
-	
-	public JTabbedPane getTabbedPane(){
+
+	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
-	
-	
-	public void inicializarComponentes(){
-		this.getContentPane().add(tabbedPane);
-		
+
+	public void inicializacionComponentes() {
+		Container contentpane = getContentPane();
+
 		tabbedPane.addTab("Contacto", panelContacto);
 		tabbedPane.addTab("Llamada", panelLlamada);
 		tabbedPane.addTab("Tipo de Contacto", panelTipoContacto);
-		
+
+		// tabbedPane.setBackground(new Color(32, 90, 130));
+		// tabbedPane.setForeground(Color.WHITE);
+		contentpane.add(tabbedPane);
+
 		JButton botonCerrar = new JButton("Cerrar");
-		this.add(botonCerrar);
 		botonCerrar.addMouseListener(new EscuchadorBotonCerrar());
+		botonCerrar.setBackground(new Color(54, 152, 217));
+		botonCerrar.setForeground(Color.WHITE);
+		// LineBorder te permite cambiar el color y Empty border el
+		// padding
+		botonCerrar.setBorder(BorderFactory.createCompoundBorder(
+				new LineBorder(Color.white), new EmptyBorder(5, 16, 5, 16)));
+		contentpane.add(botonCerrar);
+		contentpane.setBackground(new Color(32, 90, 130));
 	}
-	
-	
-	private class EscuchadorBotonCerrar extends MouseAdapter{
-		
+
+	private class EscuchadorBotonCerrar extends MouseAdapter {
+
 		@Override
 		public void mouseClicked(MouseEvent evento) {
 			JFrameFormulario.this.dispose();
 			new JFrameMenu("Menu");
 		}
-		
+
 	}
 }

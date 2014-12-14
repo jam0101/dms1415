@@ -15,6 +15,18 @@ public class ModeloDeDatos {
 		tiposContacto = new Vector<TipoContacto>();
 		inicializarValores();
 	}
+	
+	public void addContacto(Contacto contacto){
+		contactos.add(contacto);
+	}
+
+	public void addLlamada(Llamada llamada){
+		llamadas.add(llamada);
+	}
+
+	public void addTipoContacto(TipoContacto tipoContacto){
+		tiposContacto.add(tipoContacto);
+	}
 
 	public Collection<Contacto> getContactos() {
 		return contactos;

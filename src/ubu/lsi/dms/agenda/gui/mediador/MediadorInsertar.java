@@ -12,6 +12,9 @@ public class MediadorInsertar extends Mediador {
 		
 		for(CampoTexto campo : getCamposTexto()){
 			if(!campo.estaCorrecto()){
+				if(!campo.getText().equals("")){
+					System.err.println(campo.getText() + " no es un valor correcto.");
+				}
 				todosLosCamposEstanCorrectos = false;
 			}
 		}

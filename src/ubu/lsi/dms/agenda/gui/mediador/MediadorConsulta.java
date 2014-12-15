@@ -12,7 +12,7 @@ public class MediadorConsulta extends Mediador {
 			campo.setVisible(false);
 		}
 		
-		getBotonAceptar().setVisible(false);
+		getBotonAceptar().setText("Consultar");
 	}
 	
 	

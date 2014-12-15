@@ -42,7 +42,8 @@ public class JFrameFormulario extends JFrame {
 		panelTipoContacto = new JPanelTipoContacto(mediador.clone());
 
 		inicializacionComponentes();
-		
+		pack();
+
 	}
 
 	public JTabbedPane getTabbedPane() {

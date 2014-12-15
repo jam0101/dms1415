@@ -11,7 +11,6 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
-	private JLabel[] etiquetas = new JLabel[2];
 
 	public JPanelTipoContacto(Mediador mediador) {
 		super(mediador);
@@ -24,13 +23,13 @@ public class JPanelTipoContacto extends JPanelDato {
 
 		c.gridx = 0;
 		c.gridy = 0;
-		etiquetas[0] = crearLabel("IdTipoContacto");
-		add(etiquetas[0], c);
+		etiquetas.add(crearLabel("IdTipoContacto"));
+		add(etiquetas.get(0), c);
 		
 		c.gridx = 0;
 		c.gridy = 1;
-		etiquetas[0] = crearLabel("TipoContacto");
-		add(etiquetas[0], c);
+		etiquetas.add(crearLabel("TipoContacto"));
+		add(etiquetas.get(1), c);
 
 		campoTexto.add(new Campo_SoloDigitos(""));
 		campoTexto.add(new Campo_SoloDigitos(""));
@@ -38,12 +37,11 @@ public class JPanelTipoContacto extends JPanelDato {
 		c.gridx = 1;
 		c.gridy = 0;
 		add(campoTexto.get(0), c);
+		add(comboId, c);
 		
 		c.gridx = 1;
 		c.gridy = 1;
 		add(campoTexto.get(1), c);
-
-		// add(comboId);
 		
 		c.gridx = 1;
 		c.gridy = 2;

@@ -1,6 +1,7 @@
 package ubu.lsi.dms.agenda.gui.campoTexto;
 
 import java.awt.Color;
+
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;

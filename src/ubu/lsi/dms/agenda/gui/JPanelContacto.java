@@ -17,8 +17,6 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 @SuppressWarnings("serial")
 public class JPanelContacto extends JPanelDato {
 
-	private JLabel[] etiquetas = new JLabel[19];
-
 	public JPanelContacto(Mediador mediador) {
 		super(mediador);
 
@@ -28,26 +26,26 @@ public class JPanelContacto extends JPanelDato {
 		c.insets = new Insets(10, 10, 10, 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-
-		etiquetas[0] = crearLabel("Id");
-		etiquetas[1] = crearLabel("Nombre");
-		etiquetas[2] = crearLabel("Apellidos");
-		etiquetas[3] = crearLabel("Estimado");
-		etiquetas[4] = crearLabel("Direccion");
-		etiquetas[5] = crearLabel("Ciudad");
-		etiquetas[6] = crearLabel("Prov");
-		etiquetas[7] = crearLabel("Codigo postal");
-		etiquetas[8] = crearLabel("Region");
-		etiquetas[9] = crearLabel("Pais");
-		etiquetas[10] = crearLabel("Nombre de la compania");
-		etiquetas[11] = crearLabel("Cargo");
-		etiquetas[12] = crearLabel("Telefono del trabajo");
-		etiquetas[13] = crearLabel("Extension del trabajo");
-		etiquetas[14] = crearLabel("Telefono movil");
-		etiquetas[15] = crearLabel("Numero de fax");
-		etiquetas[16] = crearLabel("E-mail");
-		etiquetas[17] = crearLabel("Tipo de Contacto");
-		etiquetas[18] = crearLabel("Notas");
+		// etiquetas.add()
+		etiquetas.add(crearLabel("Id"));
+		etiquetas.add(crearLabel("Nombre"));
+		etiquetas.add(crearLabel("Apellidos"));
+		etiquetas.add(crearLabel("Estimado"));
+		etiquetas.add(crearLabel("Direccion"));
+		etiquetas.add(crearLabel("Ciudad"));
+		etiquetas.add(crearLabel("Prov"));
+		etiquetas.add(crearLabel("Codigo postal"));
+		etiquetas.add(crearLabel("Region"));
+		etiquetas.add(crearLabel("Pais"));
+		etiquetas.add(crearLabel("Nombre de la compania"));
+		etiquetas.add(crearLabel("Cargo"));
+		etiquetas.add(crearLabel("Telefono del trabajo"));
+		etiquetas.add(crearLabel("Extension del trabajo"));
+		etiquetas.add(crearLabel("Telefono movil"));
+		etiquetas.add(crearLabel("Numero de fax"));
+		etiquetas.add(crearLabel("E-mail"));
+		etiquetas.add(crearLabel("Tipo de Contacto"));
+		etiquetas.add(crearLabel("Notas"));
 
 		campoTexto.add(new Campo_SoloDigitos(""));
 		campoTexto.add(new Campo_SoloLetras(""));
@@ -69,10 +67,19 @@ public class JPanelContacto extends JPanelDato {
 		campoTexto.add(new Campo_SoloDigitos(""));
 		campoTexto.add(new Campo_Notas(""));
 
+		mediador.setEtiquetas(etiquetas);
+
 		c.gridx = 0;
 		c.gridy = 0;
-		for (int i = 0; i < etiquetas.length; i++) {
-			add(etiquetas[i], c);
+		add(etiquetas.get(0), c);
+		c.gridx++;
+		add(comboId, c);
+		campoTexto.get(0).getDocument()
+				.addDocumentListener(new ListenerFormulario());
+		add(campoTexto.get(0), c);
+		c.gridx++;
+		for (int i = 1; i < etiquetas.size(); i++) {
+			add(etiquetas.get(i), c);
 			c.gridx++;
 
 			campoTexto.get(i).getDocument()
@@ -88,7 +95,6 @@ public class JPanelContacto extends JPanelDato {
 
 		c.gridx++;
 		c.gridy++;
-		botonAceptar.setText("Aceptar (Llamada)");
 		add(botonAceptar, c);
 
 		mediador.actualizarColegas();

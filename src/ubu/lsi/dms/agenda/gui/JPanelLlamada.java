@@ -6,6 +6,7 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 
+import ubu.lsi.dms.agenda.gui.JPanelDato.ListenerFormulario;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Fecha;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Notas;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
@@ -14,7 +15,6 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 
 @SuppressWarnings("serial")
 public class JPanelLlamada extends JPanelDato {
-	private JLabel[] etiquetas = new JLabel[5];
 
 	public JPanelLlamada(Mediador mediador) {
 		super(mediador);
@@ -25,11 +25,11 @@ public class JPanelLlamada extends JPanelDato {
 		c.insets = new Insets(10, 10, 10, 10);
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-		etiquetas[0] = crearLabel("IdLlamada");
-		etiquetas[1] = crearLabel("IdContacto");
-		etiquetas[2] = crearLabel("FechaLlamada");
-		etiquetas[3] = crearLabel("Asunto");
-		etiquetas[4] = crearLabel("Notas");
+		etiquetas.add(crearLabel("IdLlamada"));
+		etiquetas.add(crearLabel("IdContacto"));
+		etiquetas.add(crearLabel("FechaLlamada"));
+		etiquetas.add(crearLabel("Asunto"));
+		etiquetas.add(crearLabel("Notas"));
 
 		campoTexto.add(new Campo_SoloDigitos(""));
 		campoTexto.add(new Campo_SoloDigitos(""));
@@ -37,11 +37,17 @@ public class JPanelLlamada extends JPanelDato {
 		campoTexto.add(new Campo_SoloLetras(""));
 		campoTexto.add(new Campo_Notas(""));
 
-		// add(comboId);
 		c.gridx = 0;
 		c.gridy = 0;
-		for (int i = 0; i < etiquetas.length; i++) {
-			add(etiquetas[i], c);
+		add(etiquetas.get(0), c);
+		c.gridx++;
+		add(comboId, c);
+		campoTexto.get(0).getDocument()
+				.addDocumentListener(new ListenerFormulario());
+		add(campoTexto.get(0), c);
+		c.gridx++;
+		for (int i = 1; i < etiquetas.size(); i++) {
+			add(etiquetas.get(i), c);
 			c.gridx++;
 
 			campoTexto.get(i).getDocument()
@@ -57,7 +63,6 @@ public class JPanelLlamada extends JPanelDato {
 
 		c.gridx++;
 		c.gridy++;
-		botonAceptar.setText("Aceptar (Llamada)");
 		add(botonAceptar, c);
 
 		mediador.actualizarColegas();

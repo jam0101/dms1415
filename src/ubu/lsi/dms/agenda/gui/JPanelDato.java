@@ -23,12 +23,18 @@ public abstract class JPanelDato extends JPanel {
 
 	protected JComboBox<Integer> comboId;
 	protected ArrayList<CampoTexto> campoTexto;
+	protected ArrayList<JLabel> etiquetas;
 	protected JButton botonAceptar;
 
 	protected Mediador mediador;
 
 	public JPanelDato(Mediador mediador) {
+		etiquetas = new ArrayList<>();
 		comboId = new JComboBox<>();
+		comboId.addItem(1);
+		comboId.addItem(2);
+		comboId.setEditable(false);
+		
 		campoTexto = new ArrayList<>();
 		botonAceptar = crearButton("Aceptar");
 
@@ -38,17 +44,16 @@ public abstract class JPanelDato extends JPanel {
 		this.mediador.setComboId(comboId);
 		this.mediador.setCamposTexto(campoTexto);
 		this.mediador.setBotonAceptar(botonAceptar);
-		
 	}
 
-	public static JTextField crearTextField() {
-		JTextField field = new JTextField("", 26);
-		field.setBorder(BorderFactory.createCompoundBorder(new LineBorder(
-				Color.white), new EmptyBorder(5, 16, 5, 16)));
-		field.setMinimumSize(field.getPreferredSize());
-		field.setSize(new Dimension(100, 50));
-		return field;
-	}
+//	public static JTextField crearTextField() {
+//		JTextField field = new JTextField("", 26);
+//		field.setBorder(BorderFactory.createCompoundBorder(new LineBorder(
+//				Color.white), new EmptyBorder(5, 16, 5, 16)));
+//		field.setMinimumSize(field.getPreferredSize());
+//		field.setSize(new Dimension(100, 50));
+//		return field;
+//	}
 
 	public static JLabel crearLabel(String nombre) {
 		JLabel label = new JLabel();

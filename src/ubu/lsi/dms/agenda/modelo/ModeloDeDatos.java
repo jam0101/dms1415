@@ -1,9 +1,10 @@
 package ubu.lsi.dms.agenda.modelo;
 
 import java.util.Collection;
+import java.util.Observable;
 import java.util.Vector;
 
-public class ModeloDeDatos {
+public class ModeloDeDatos extends Observable {
 
 	private Collection<Contacto> contactos;
 	private Collection<Llamada> llamadas;
@@ -110,14 +111,20 @@ public class ModeloDeDatos {
 
 	public void addContacto(Contacto contacto) {
 		contactos.add(contacto);
+		notifyObservers();
 	}
 
 	public void addLlamada(Llamada llamada) {
 		llamadas.add(llamada);
+		notifyObservers();
 	}
 
 	public void addTipoContacto(TipoContacto tipoContacto) {
 		tiposContacto.add(tipoContacto);
+		notifyObservers();
 	}
-
+	
+	
+	
+	
 }

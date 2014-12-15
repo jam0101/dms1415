@@ -18,15 +18,20 @@ import javax.swing.border.LineBorder;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorActualizar;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorConsulta;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorInsertar;
+import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JFrameMenu extends JFrame {
 
 	private JButton botones[] = new JButton[3];
-
-	public JFrameMenu(String nombre) {
+	
+	private ModeloDeDatos modeloDeDatos;
+	
+	public JFrameMenu(String nombre, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
-
+		
+		this.modeloDeDatos = modeloDeDatos;
+		
 		inicializacionComponentes();
 
 		// Tamaño y tamaño mínimo
@@ -87,7 +92,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Insertar", new MediadorInsertar());
+			new JFrameFormulario("Insertar", new MediadorInsertar(), modeloDeDatos);
 		}
 	}
 
@@ -101,7 +106,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Consultar", new MediadorConsulta());
+			new JFrameFormulario("Consultar", new MediadorConsulta(), modeloDeDatos);
 		}
 	}
 
@@ -115,7 +120,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Actualizar", new MediadorActualizar());
+			new JFrameFormulario("Actualizar", new MediadorActualizar(), modeloDeDatos);
 		}
 	}
 

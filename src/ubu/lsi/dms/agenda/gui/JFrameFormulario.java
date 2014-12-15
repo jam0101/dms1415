@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
@@ -23,9 +24,14 @@ public class JFrameFormulario extends JFrame {
 	JPanelContacto panelContacto;
 	JPanelLlamada panelLlamada;
 	JPanelTipoContacto panelTipoContacto;
+	
+	ModeloDeDatos modeloDeDatos;
 
-	public JFrameFormulario(String nombre, Mediador mediador) {
+	public JFrameFormulario(String nombre, Mediador mediador, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
+		
+		this.modeloDeDatos = modeloDeDatos;
+		
 		setVisible(true);
 		setLayout(new FlowLayout());
 		setSize(950, 610);
@@ -37,9 +43,13 @@ public class JFrameFormulario extends JFrame {
 
 		System.out.println("JFrameFormulario: "
 				+ mediador.getClass().getCanonicalName());
-		panelContacto = new JPanelContacto(mediador.clone());
-		panelLlamada = new JPanelLlamada(mediador.clone());
-		panelTipoContacto = new JPanelTipoContacto(mediador.clone());
+		panelContacto = new JPanelContacto(mediador.clone(), modeloDeDatos);
+		panelLlamada = new JPanelLlamada(mediador.clone(), modeloDeDatos);
+		panelTipoContacto = new JPanelTipoContacto(mediador.clone(), modeloDeDatos);
+		
+		modeloDeDatos.addObserver(panelContacto);
+		modeloDeDatos.addObserver(panelLlamada);
+		modeloDeDatos.addObserver(panelTipoContacto);
 
 		inicializacionComponentes();
 		pack();
@@ -78,7 +88,7 @@ public class JFrameFormulario extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent evento) {
 			JFrameFormulario.this.dispose();
-			new JFrameMenu("Menu");
+			new JFrameMenu("Menu", modeloDeDatos);
 		}
 
 	}

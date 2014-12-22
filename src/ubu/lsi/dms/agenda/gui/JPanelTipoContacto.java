@@ -13,9 +13,9 @@ import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
-	private JLabel[] etiquetas = new JLabel[2];
 
-	public JPanelTipoContacto(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
+	public JPanelTipoContacto(Mediador mediador, Operacion operacion,
+			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
 
 		setLayout(new GridBagLayout());
@@ -26,52 +26,55 @@ public class JPanelTipoContacto extends JPanelDato {
 
 		c.gridx = 0;
 		c.gridy = 0;
-		etiquetas[0] = crearLabel("IdTipoContacto");
-		add(etiquetas[0], c);
-		
+		etiquetas.add(crearLabel("IdTipoContacto"));
+		add(etiquetas.get(0), c);
+
 		c.gridx = 0;
 		c.gridy = 1;
-		etiquetas[0] = crearLabel("TipoContacto");
-		add(etiquetas[0], c);
+		etiquetas.add(crearLabel("TipoContacto"));
+		add(etiquetas.get(1), c);
 
-		campoTexto.add(new Campo_SoloDigitos(""));
-		campoTexto.add(new Campo_SoloDigitos(""));
+		mediador.setEtiquetas(etiquetas);
 		
+		campoTexto.add(new Campo_SoloDigitos(""));
+		campoTexto.add(new Campo_SoloDigitos(""));
+
 		c.gridx = 1;
 		c.gridy = 0;
 		add(campoTexto.get(0), c);
-		
+
 		c.gridx = 1;
 		c.gridy = 1;
 		add(campoTexto.get(1), c);
 
 		// add(comboId);
-		
+
 		c.gridx = 1;
 		c.gridy = 2;
 		add(botonAceptar, c);
-		
-		campoTexto.get(0).getDocument().addDocumentListener(new ListenerFormulario());
-		campoTexto.get(1).getDocument().addDocumentListener(new ListenerFormulario());
-		
-		
+
+		campoTexto.get(0).getDocument()
+				.addDocumentListener(new ListenerFormulario());
+		campoTexto.get(1).getDocument()
+				.addDocumentListener(new ListenerFormulario());
+
 		mediador.actualizarColegas();
 	}
-	
-	
+
 	@Override
 	public void insertar() {
-		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(), campoTexto.get(1).getText());
+		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(),
+				campoTexto.get(1).getText());
 	}
 
 	@Override
 	public void consultar() {
 		getModeloDeDatos().getTiposContacto();
-		//TODO
 	}
 
 	@Override
 	public void actualizar() {
-		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(), campoTexto.get(1).getText());		
+		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(),
+				campoTexto.get(1).getText());
 	}
 }

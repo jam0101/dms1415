@@ -27,6 +27,7 @@ public abstract class JPanelDato extends JPanel {
 
 	protected JComboBox<Integer> comboId;
 	protected ArrayList<CampoTexto> campoTexto;
+	protected ArrayList<JLabel> etiquetas;
 	protected JButton botonAceptar;
 	private Operacion operacion;
 	private ModeloDeDatos modeloDeDatos;
@@ -37,6 +38,7 @@ public abstract class JPanelDato extends JPanel {
 		this.operacion = operacion;
 		this.setModeloDeDatos(modeloDeDatos);
 		
+		etiquetas = new ArrayList<>();
 		comboId = new JComboBox<>();
 		campoTexto = new ArrayList<>();
 		botonAceptar = crearButton("Aceptar");

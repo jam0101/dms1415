@@ -1,16 +1,17 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
@@ -18,28 +19,25 @@ import javax.swing.event.DocumentListener;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
-public abstract class JPanelDato extends JPanel implements Observer {
+public abstract class JPanelDato extends JPanel {
 
 	protected JComboBox<Integer> comboId;
 	protected ArrayList<CampoTexto> campoTexto;
-	protected ArrayList<JLabel> etiquetas;
 	protected JButton botonAceptar;
-	protected JTable tablaDatos;
+	private Operacion operacion;
+	private ModeloDeDatos modeloDeDatos;
 
 	protected Mediador mediador;
-	
-	protected ModeloDeDatos modeloDeDatos;
 
-	public JPanelDato(Mediador mediador, ModeloDeDatos modeloDeDatos) {
-		this.modeloDeDatos = modeloDeDatos;
+	public JPanelDato(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
+		this.operacion = operacion;
+		this.setModeloDeDatos(modeloDeDatos);
 		
-		etiquetas = new ArrayList<>();
 		comboId = new JComboBox<>();
-		comboId.setEditable(false);
-		
 		campoTexto = new ArrayList<>();
 		botonAceptar = crearButton("Aceptar");
 
@@ -49,6 +47,17 @@ public abstract class JPanelDato extends JPanel implements Observer {
 		this.mediador.setComboId(comboId);
 		this.mediador.setCamposTexto(campoTexto);
 		this.mediador.setBotonAceptar(botonAceptar);
+		
+		botonAceptar.addActionListener(new BotonAceptarListener());
+	}
+
+	public static JTextField crearTextField() {
+		JTextField field = new JTextField("", 26);
+		field.setBorder(BorderFactory.createCompoundBorder(new LineBorder(
+				Color.white), new EmptyBorder(5, 16, 5, 16)));
+		field.setMinimumSize(field.getPreferredSize());
+		field.setSize(new Dimension(100, 50));
+		return field;
 	}
 
 	public static JLabel crearLabel(String nombre) {
@@ -71,6 +80,23 @@ public abstract class JPanelDato extends JPanel implements Observer {
 				Color.white), new EmptyBorder(5, 16, 5, 16)));
 		return button;
 	}
+	
+	
+	public abstract void insertar();
+	public abstract void consultar();
+	public abstract void actualizar();
+	
+	
+
+	public ModeloDeDatos getModeloDeDatos() {
+		return modeloDeDatos;
+	}
+
+	public void setModeloDeDatos(ModeloDeDatos modeloDeDatos) {
+		this.modeloDeDatos = modeloDeDatos;
+	}
+
+
 
 	protected class ListenerFormulario implements DocumentListener {
 
@@ -94,22 +120,13 @@ public abstract class JPanelDato extends JPanel implements Observer {
 	}
 	
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-//		if(){
-//			rellenarEnInsercion();
-//		} else if() {
-//			rellenarEnConsulta();
-//		} else if() {
-//			rellenarEnActualizacion();
-//		}
-			
+	private class BotonAceptarListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			operacion.realizarOperacion(JPanelDato.this);
+		}
+		
 	}
-	
-	public abstract void rellenarEnInsercion();
-	
-	public abstract void rellenarEnConsulta();
-	
-	public abstract void rellenarEnActualizacion();
 
 }

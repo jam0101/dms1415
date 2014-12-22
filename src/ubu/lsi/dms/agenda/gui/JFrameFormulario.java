@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
@@ -25,13 +26,10 @@ public class JFrameFormulario extends JFrame {
 	JPanelLlamada panelLlamada;
 	JPanelTipoContacto panelTipoContacto;
 	
-	ModeloDeDatos modeloDeDatos;
-	
-	public JFrameFormulario(String nombre, Mediador mediador) {
+	private ModeloDeDatos modeloDeDatos;
 
-	public JFrameFormulario(String nombre, Mediador mediador, ModeloDeDatos modeloDeDatos) {
+	public JFrameFormulario(String nombre, Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
-		
 		this.modeloDeDatos = modeloDeDatos;
 		
 		setVisible(true);
@@ -43,19 +41,12 @@ public class JFrameFormulario extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		System.out.println("JFrameFormulario: "
-				+ mediador.getClass().getCanonicalName());
-		panelContacto = new JPanelContacto(mediador.clone(), modeloDeDatos);
-		panelLlamada = new JPanelLlamada(mediador.clone(), modeloDeDatos);
-		panelTipoContacto = new JPanelTipoContacto(mediador.clone(), modeloDeDatos);
-		
-		modeloDeDatos.addObserver(panelContacto);
-		modeloDeDatos.addObserver(panelLlamada);
-		modeloDeDatos.addObserver(panelTipoContacto);
+		panelContacto = new JPanelContacto(mediador.clone(), operacion, modeloDeDatos);
+		panelLlamada = new JPanelLlamada(mediador.clone(), operacion, modeloDeDatos);
+		panelTipoContacto = new JPanelTipoContacto(mediador.clone(), operacion, modeloDeDatos);
 
 		inicializacionComponentes();
-		pack();
-
+		
 	}
 
 	public JTabbedPane getTabbedPane() {

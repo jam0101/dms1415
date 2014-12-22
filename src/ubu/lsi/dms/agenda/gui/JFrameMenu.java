@@ -18,6 +18,9 @@ import javax.swing.border.LineBorder;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorActualizar;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorConsulta;
 import ubu.lsi.dms.agenda.gui.mediador.MediadorInsertar;
+import ubu.lsi.dms.agenda.gui.operacion.OperacionActualizar;
+import ubu.lsi.dms.agenda.gui.operacion.OperacionConsultar;
+import ubu.lsi.dms.agenda.gui.operacion.OperacionInsertar;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
@@ -29,7 +32,6 @@ public class JFrameMenu extends JFrame {
 	
 	public JFrameMenu(String nombre, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
-		
 		this.modeloDeDatos = modeloDeDatos;
 		
 		inicializacionComponentes();
@@ -92,7 +94,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Insertar", new MediadorInsertar(), modeloDeDatos);
+			new JFrameFormulario("Insertar", new MediadorInsertar(), new OperacionInsertar(), modeloDeDatos);
 		}
 	}
 
@@ -106,7 +108,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Consultar", new MediadorConsulta(), modeloDeDatos);
+			new JFrameFormulario("Consultar", new MediadorConsulta(), new OperacionConsultar(), modeloDeDatos);
 		}
 	}
 
@@ -120,7 +122,7 @@ public class JFrameMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Actualizar", new MediadorActualizar(), modeloDeDatos);
+			new JFrameFormulario("Actualizar", new MediadorActualizar(), new OperacionActualizar(), modeloDeDatos);
 		}
 	}
 

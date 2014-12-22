@@ -1,11 +1,9 @@
 package ubu.lsi.dms.agenda.gui.mediador;
 
-import ubu.lsi.dms.agenda.gui.JPanelDato;
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 
 public class MediadorActualizar extends Mediador {
 
-	private static int POSICION_ID = 0;
 	@Override
 	public void actualizarColegas() {
 		boolean todosLosCamposEstanCorrectos = true;
@@ -15,9 +13,6 @@ public class MediadorActualizar extends Mediador {
 //		} else {
 //			getBotonAceptar().setEnabled(false);
 //		}
-		
-		getCamposTexto().get(POSICION_ID).setVisible(false);
-		getBotonAceptar().setText("Actualizar");
 		
 		for(CampoTexto campo : getCamposTexto()){
 			if(!campo.estaCorrecto()){
@@ -33,6 +28,4 @@ public class MediadorActualizar extends Mediador {
 	 public Mediador clone()   {
 	      return new MediadorActualizar();
 	 }
-
-
 }

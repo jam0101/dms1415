@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 
@@ -12,7 +11,6 @@ public abstract class Mediador implements Cloneable {
 
 	private JComboBox<Integer> comboId;
 	private ArrayList<CampoTexto> camposTexto;
-	protected ArrayList<JLabel> etiquetas;
 	private JButton botonAceptar;
 
 	public JComboBox<Integer> getComboId() {
@@ -30,14 +28,6 @@ public abstract class Mediador implements Cloneable {
 	public void setCamposTexto(ArrayList<CampoTexto> camposTexto) {
 		this.camposTexto = camposTexto;
 	}
-	
-	public void setEtiquetas(ArrayList<JLabel> etiquetas){
-		this.etiquetas = etiquetas;
-	}
-	
-	public ArrayList<JLabel> getEtiquetas(){
-		return etiquetas;
-	}
 
 	public JButton getBotonAceptar() {
 		return botonAceptar;
@@ -52,6 +42,5 @@ public abstract class Mediador implements Cloneable {
 	
 	@Override
 	public abstract Mediador clone();
-	
 	
 }

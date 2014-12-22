@@ -8,11 +8,11 @@ public class MediadorConsulta extends Mediador {
 	public void actualizarColegas() {
 		
 		for(JTextField campo : getCamposTexto()){
-//			campo.setEnabled(false);
+			campo.setEnabled(false);
 			campo.setVisible(false);
 		}
 		
-		getBotonAceptar().setText("Consultar");
+		getBotonAceptar().setVisible(false);
 	}
 	
 	

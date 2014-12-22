@@ -24,6 +24,7 @@ public class JFrameFormulario extends JFrame {
 	JPanelLlamada panelLlamada;
 	JPanelTipoContacto panelTipoContacto;
 
+	
 	public JFrameFormulario(String nombre, Mediador mediador) {
 		super(nombre);
 		setVisible(true);

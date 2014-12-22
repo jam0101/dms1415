@@ -1,7 +1,6 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -9,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
@@ -25,6 +24,7 @@ public abstract class JPanelDato extends JPanel {
 	protected ArrayList<CampoTexto> campoTexto;
 	protected ArrayList<JLabel> etiquetas;
 	protected JButton botonAceptar;
+	protected JTable tablaDatos;
 
 	protected Mediador mediador;
 
@@ -45,15 +45,6 @@ public abstract class JPanelDato extends JPanel {
 		this.mediador.setCamposTexto(campoTexto);
 		this.mediador.setBotonAceptar(botonAceptar);
 	}
-
-//	public static JTextField crearTextField() {
-//		JTextField field = new JTextField("", 26);
-//		field.setBorder(BorderFactory.createCompoundBorder(new LineBorder(
-//				Color.white), new EmptyBorder(5, 16, 5, 16)));
-//		field.setMinimumSize(field.getPreferredSize());
-//		field.setSize(new Dimension(100, 50));
-//		return field;
-//	}
 
 	public static JLabel crearLabel(String nombre) {
 		JLabel label = new JLabel();

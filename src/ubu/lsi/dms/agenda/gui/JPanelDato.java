@@ -2,6 +2,8 @@ package ubu.lsi.dms.agenda.gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,9 +18,10 @@ import javax.swing.event.DocumentListener;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
-public abstract class JPanelDato extends JPanel {
+public abstract class JPanelDato extends JPanel implements Observer {
 
 	protected JComboBox<Integer> comboId;
 	protected ArrayList<CampoTexto> campoTexto;
@@ -27,12 +30,14 @@ public abstract class JPanelDato extends JPanel {
 	protected JTable tablaDatos;
 
 	protected Mediador mediador;
+	
+	protected ModeloDeDatos modeloDeDatos;
 
-	public JPanelDato(Mediador mediador) {
+	public JPanelDato(Mediador mediador, ModeloDeDatos modeloDeDatos) {
+		this.modeloDeDatos = modeloDeDatos;
+		
 		etiquetas = new ArrayList<>();
 		comboId = new JComboBox<>();
-		comboId.addItem(1);
-		comboId.addItem(2);
 		comboId.setEditable(false);
 		
 		campoTexto = new ArrayList<>();
@@ -87,5 +92,24 @@ public abstract class JPanelDato extends JPanel {
 			// System.out.println("removeUpdate");
 		}
 	}
+	
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+//		if(){
+//			rellenarEnInsercion();
+//		} else if() {
+//			rellenarEnConsulta();
+//		} else if() {
+//			rellenarEnActualizacion();
+//		}
+			
+	}
+	
+	public abstract void rellenarEnInsercion();
+	
+	public abstract void rellenarEnConsulta();
+	
+	public abstract void rellenarEnActualizacion();
 
 }

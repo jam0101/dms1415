@@ -1,5 +1,6 @@
 package ubu.lsi.dms.agenda.gui.mediador;
 
+import ubu.lsi.dms.agenda.gui.JPanelDato;
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 
 public class MediadorActualizar extends Mediador {
@@ -32,4 +33,6 @@ public class MediadorActualizar extends Mediador {
 	 public Mediador clone()   {
 	      return new MediadorActualizar();
 	 }
+
+
 }

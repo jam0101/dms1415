@@ -3,17 +3,19 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Observable;
 
 import javax.swing.JLabel;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
 
-	public JPanelTipoContacto(Mediador mediador) {
-		super(mediador);
+	public JPanelTipoContacto(Mediador mediador, ModeloDeDatos modeloDeDatos) {
+		super(mediador, modeloDeDatos);
 
 		setLayout(new GridBagLayout());
 
@@ -49,4 +51,23 @@ public class JPanelTipoContacto extends JPanelDato {
 
 		mediador.actualizarColegas();
 	}
+
+	@Override
+	public void rellenarEnInsercion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rellenarEnConsulta() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rellenarEnActualizacion() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

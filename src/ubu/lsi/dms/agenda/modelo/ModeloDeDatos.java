@@ -15,32 +15,99 @@ public class ModeloDeDatos {
 		tiposContacto = new Vector<TipoContacto>();
 		inicializarValores();
 	}
-	
-	
+
 	/** Añade un contacto, o, si la id ya existe, lo actualiza */
-	public void addContacto(String id, String nombre, String apellidos, String estimado, String direccion, String ciudad,
-			String prov, String codPostal, String region, String pais, String nombreCompania, String cargo, String telfTrabajo,
-			String extensionTrabajo, String telfMovil, String numFax, String email, String idTipoContacto,String notas   ){
-		
-//		TODO
-//		contactos.add(contacto);
+	public void addContacto(String id, String nombre, String apellidos,
+			String estimado, String direccion, String ciudad, String prov,
+			String codPostal, String region, String pais,
+			String nombreCompania, String cargo, String telfTrabajo,
+			String extensionTrabajo, String telfMovil, String numFax,
+			String email, String idTipoContacto, String notas) {
+
+		TipoContacto tc = null;
+		for (TipoContacto c : tiposContacto) {
+			if (c.getIdTipoContacto() == Integer.parseInt(idTipoContacto)) {
+				tc = c;
+				break;
+			}
+		}
+
+		// Comprobar si ya existe el contacto
+		for (Contacto c : contactos) {
+			if (Integer.parseInt(id) == c.getIdContacto()) {
+				// Actualizar
+				c.setNombre(nombre);
+				c.setApellidos(apellidos);
+				c.setEstimado(estimado);
+				c.setDireccion(direccion);
+				c.setCiudad(ciudad);
+				c.setProv(prov);
+				c.setCodPostal(codPostal);
+				c.setRegion(region);
+				c.setPais(pais);
+				c.setNombreCompania(nombreCompania);
+				c.setCargo(cargo);
+				c.setTelefonoTrabajo(telfTrabajo);
+				c.setExtensionTrabajo(extensionTrabajo);
+				c.setTelefonoMovil(telfMovil);
+				c.setNumFax(numFax);
+				c.setNomCorreoElectronico(email);
+				c.setTipoContacto(tc);
+				c.setNotas(notas);
+				return;
+			}
+		}
+
+		// Insertar
+		Contacto contacto = new Contacto(Integer.parseInt(id), nombre,
+				apellidos, estimado, direccion, ciudad, prov, codPostal,
+				region, pais, nombreCompania, cargo, telfTrabajo,
+				extensionTrabajo, telfMovil, numFax, email, notas, tc);
+		contactos.add(contacto);
 	}
 
-	
 	/** Añade una llamada, o, si la id ya existe, lo actualiza */
-	public void addLlamada(String id, String idContacto, String fechaLlamada, String asunto, String notas){
-//		TODO
-//		llamadas.add(llamada);
+	public void addLlamada(String id, String idContacto, String fechaLlamada,
+			String asunto, String notas) {
+		Contacto contacto = null;
+		for (Contacto c : contactos) {
+			if (c.getIdContacto() == Integer.parseInt(idContacto)) {
+				contacto = c;
+				break;
+			}
+		}
+
+		// Actualizar llamada
+		for (Llamada l : llamadas) {
+			if (Integer.parseInt(id) == l.getIdLlamada()) {
+				l.setContacto(contacto);
+				l.setFechaLlamada(fechaLlamada);
+				l.setAsunto(asunto);
+				l.setNotas(notas);
+				return;
+			}
+		}
+
+		// Insertar
+		Llamada llamada = new Llamada(Integer.parseInt(id), contacto,
+				fechaLlamada, asunto, notas);
+		llamadas.add(llamada);
 	}
 
-	
 	/** Añade un tipo de contacto, o, si la id ya existe, lo actualiza */
-	public void addTipoContacto(String id, String tipo){
-//		TODO
-//		tiposContacto.add(tipoContacto);
+	public void addTipoContacto(String id, String tipo) {
+		for (TipoContacto tc : tiposContacto) {
+			if (Integer.parseInt(id) == tc.getIdTipoContacto()) {
+				tc.setTipoContacto(tipo);
+				return;
+			}
+		}
+
+		// Insertar
+		TipoContacto tipoContacto = new TipoContacto(Integer.parseInt(id), tipo);
+		tiposContacto.add(tipoContacto);
 	}
 
-	
 	public Collection<Contacto> getContactos() {
 		return contactos;
 	}

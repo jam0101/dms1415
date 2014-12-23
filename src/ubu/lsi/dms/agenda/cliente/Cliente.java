@@ -12,15 +12,16 @@ import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
  *
  */
 public class Cliente {
-	
+
 	/**
 	 * Función mail del programa.
-	 *  
-	 * @param args Argumentos de entrada del programa.
+	 * 
+	 * @param args
+	 *            Argumentos de entrada del programa.
 	 */
-	public static final void main (String[] args){
+	public static final void main(String[] args) {
 		ModeloDeDatos modeloDeDatos = new ModeloDeDatos();
 		new JFrameMenu("Agenda", modeloDeDatos);
 	}
-	
+
 }

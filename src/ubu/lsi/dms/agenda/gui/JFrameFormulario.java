@@ -28,64 +28,74 @@ import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
  */
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
-	
+
 	/**
 	 * Panel tabulado de formulario.
 	 */
 	JTabbedPane tabbedPane = new JTabbedPane();
-	
+
 	/**
 	 * Primera pestaña del panel tabulado, correspondiente a los Contactos.
 	 */
 	JPanelContacto panelContacto;
-	
+
 	/**
 	 * Segunda pestaña del panel tabulado, correspondiente a las Llamadas.
 	 */
 	JPanelLlamada panelLlamada;
-	
+
 	/**
-	 * Tercera pestaña del panel tabulado, correspondiente a los Tipos de Contacto.
+	 * Tercera pestaña del panel tabulado, correspondiente a los Tipos de
+	 * Contacto.
 	 */
 	JPanelTipoContacto panelTipoContacto;
-	
+
 	/**
-	 * Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 * Clase de datos que contiene los datos sobre los que trabaja la
+	 * aplicación.
 	 */
 	private ModeloDeDatos modeloDeDatos;
-	
-	
+
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @param nombre		Nombre del frame.
-	 * @param mediador		Mediador que corresponde a la clase de operación asignada a este frame.
-	 * @param operacion		Operación asignada a este frame.
-	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 * @param nombre
+	 *            Nombre del frame.
+	 * @param mediador
+	 *            Mediador que corresponde a la clase de operación asignada a
+	 *            este frame.
+	 * @param operacion
+	 *            Operación asignada a este frame.
+	 * @param modeloDeDatos
+	 *            Clase de datos que contiene los datos sobre los que trabaja la
+	 *            aplicación.
 	 */
-	public JFrameFormulario(String nombre, Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
+	public JFrameFormulario(String nombre, Mediador mediador,
+			Operacion operacion, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
 		this.modeloDeDatos = modeloDeDatos;
-		
+
 		setVisible(true);
 		setLayout(new FlowLayout());
 		setSize(950, 610);
 		setMinimumSize(new Dimension(950, 610));
-//		setMinimumSize(new Dimension(950, 1020));
+		// setMinimumSize(new Dimension(950, 1020));
 		// Para que aparezca centrado
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		panelContacto = new JPanelContacto(mediador.clone(), operacion, modeloDeDatos);
-		panelLlamada = new JPanelLlamada(mediador.clone(), operacion, modeloDeDatos);
-		panelTipoContacto = new JPanelTipoContacto(mediador.clone(), operacion, modeloDeDatos);
+		panelContacto = new JPanelContacto(mediador.clone(), operacion,
+				modeloDeDatos);
+		panelLlamada = new JPanelLlamada(mediador.clone(), operacion,
+				modeloDeDatos);
+		panelTipoContacto = new JPanelTipoContacto(mediador.clone(), operacion,
+				modeloDeDatos);
 
 		inicializacionComponentes();
-		
+
 	}
-	
-	
+
 	/**
 	 * Devuelve el panel tabulado.
 	 * 
@@ -94,8 +104,7 @@ public class JFrameFormulario extends JFrame {
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
-	
-	
+
 	/**
 	 * Inicializa los componentes gráficos del frame.
 	 */
@@ -121,17 +130,17 @@ public class JFrameFormulario extends JFrame {
 		contentpane.add(botonCerrar);
 		contentpane.setBackground(new Color(32, 90, 130));
 	}
-	
 
 	/**
-	 *	Listener correspondiente al botón Cerrar
+	 * Listener correspondiente al botón Cerrar
 	 */
 	private class EscuchadorBotonCerrar extends MouseAdapter {
-		
+
 		/**
 		 * Cierra el frame actual y abre el frame del menú principal.
 		 * 
-		 * @param e Evento
+		 * @param e
+		 *            Evento
 		 */
 		@Override
 		public void mouseClicked(MouseEvent evento) {

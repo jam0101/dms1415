@@ -33,28 +33,31 @@ import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
  */
 @SuppressWarnings("serial")
 public class JFrameMenu extends JFrame {
-	
+
 	/**
 	 * Botones correspondientes a los tres tipos posibles de operación.
 	 */
 	private JButton botones[] = new JButton[3];
-	
+
 	/**
-	 * Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 * Clase de datos que contiene los datos sobre los que trabaja la
+	 * aplicación.
 	 */
 	private ModeloDeDatos modeloDeDatos;
-	
-	
+
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @param nombre		Nombre del frame.
-	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 * @param nombre
+	 *            Nombre del frame.
+	 * @param modeloDeDatos
+	 *            Clase de datos que contiene los datos sobre los que trabaja la
+	 *            aplicación.
 	 */
 	public JFrameMenu(String nombre, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
 		this.modeloDeDatos = modeloDeDatos;
-		
+
 		inicializacionComponentes();
 
 		// Tamaño y tamaño mínimo
@@ -67,8 +70,7 @@ public class JFrameMenu extends JFrame {
 		// pack();
 		setVisible(true);
 	}
-	
-	
+
 	/**
 	 * Inicializa los componentes gráficos del frame.
 	 */
@@ -110,53 +112,62 @@ public class JFrameMenu extends JFrame {
 	}
 
 	/**
-	 *	Listener correspondiente al botón Insertar
+	 * Listener correspondiente al botón Insertar
 	 */
 	private class EscuchadorBotonInsertar implements ActionListener {
-		
+
 		/**
-		 * Cierra el frame actual y abre un frame formulario de Inserción de datos.
+		 * Cierra el frame actual y abre un frame formulario de Inserción de
+		 * datos.
 		 * 
-		 * @param e Evento
+		 * @param e
+		 *            Evento
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Insertar", new MediadorInsertar(), new OperacionInsertar(), modeloDeDatos);
+			new JFrameFormulario("Insertar", new MediadorInsertar(),
+					new OperacionInsertar(), modeloDeDatos);
 		}
 	}
 
 	/**
-	 *	Listener correspondiente al botón Consultar
+	 * Listener correspondiente al botón Consultar
 	 */
 	private class EscuchadorBotonConsultar implements ActionListener {
-		
+
 		/**
-		 * Cierra el frame actual y abre un frame formulario de Consulta de datos.
+		 * Cierra el frame actual y abre un frame formulario de Consulta de
+		 * datos.
 		 * 
-		 * @param e Evento
+		 * @param e
+		 *            Evento
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Consultar", new MediadorConsulta(), new OperacionConsultar(), modeloDeDatos);
+			new JFrameFormulario("Consultar", new MediadorConsulta(),
+					new OperacionConsultar(), modeloDeDatos);
 		}
 	}
 
 	/**
-	 *	Listener correspondiente al botón Actualizar
+	 * Listener correspondiente al botón Actualizar
 	 */
 	private class EscuchadorBotonActualizar implements ActionListener {
-		
+
 		/**
-		 * Cierra el frame actual y abre un frame formulario de Actualización de datos.
+		 * Cierra el frame actual y abre un frame formulario de Actualización de
+		 * datos.
 		 * 
-		 * @param e Evento
+		 * @param e
+		 *            Evento
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrameMenu.this.dispose();
-			new JFrameFormulario("Actualizar", new MediadorActualizar(), new OperacionActualizar(), modeloDeDatos);
+			new JFrameFormulario("Actualizar", new MediadorActualizar(),
+					new OperacionActualizar(), modeloDeDatos);
 		}
 	}
 

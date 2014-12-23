@@ -1,6 +1,7 @@
 package ubu.lsi.dms.agenda.gui.campoTexto;
 
 import java.awt.Color;
+
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -16,11 +17,12 @@ import javax.swing.border.LineBorder;
  */
 @SuppressWarnings("serial")
 public abstract class CampoTexto extends JTextField {
-	
+
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @param texto	Texto inicial del TextField.
+	 * @param texto
+	 *            Texto inicial del TextField.
 	 */
 	public CampoTexto(String texto) {
 		super(texto, 10);
@@ -29,7 +31,7 @@ public abstract class CampoTexto extends JTextField {
 				new LineBorder(Color.white), new EmptyBorder(5, 16, 5, 16)));
 
 	}
-	
+
 	/**
 	 * Comprueba si su texto corresponde a un valor válido.
 	 * 

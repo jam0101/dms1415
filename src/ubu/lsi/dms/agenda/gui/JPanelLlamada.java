@@ -3,8 +3,11 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Fecha;
@@ -12,7 +15,6 @@ import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Notas;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloLetras;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
-import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaContacto;
 import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaLlamada;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.Llamada;
@@ -74,9 +76,36 @@ public class JPanelLlamada extends JPanelDato {
 		campoTexto.add(new Campo_SoloLetras(""));
 		campoTexto.add(new Campo_Notas(""));
 
-		// add(comboId);
+		c.gridx = 1;
+		c.gridy = 0;
+		comboId = new JComboBox<>();
+		for (Llamada llam : getModeloDeDatos().getLlamadas()) {
+			comboId.addItem(llam.getIdLlamada());
+		}
+		comboId.setEditable(false);
+		comboId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				comboId.getSelectedItem();
+				for (Llamada l : getModeloDeDatos().getLlamadas()) {
+					if (l.getIdLlamada() == (int) comboId.getSelectedItem()) {
+						campoTexto.get(1).setText(
+								Integer.toString(l.getContacto()
+										.getIdContacto()));
+						campoTexto.get(2).setText(l.getFechaLlamada());
+						campoTexto.get(3).setText(l.getAsunto());
+						campoTexto.get(4).setText(l.getNotas());
+						break;
+					}
+				}
+
+			}
+		});
+		mediador.setComboId(comboId);
+		add(comboId, c);
+
 		c.gridx = 0;
 		c.gridy = 0;
+
 		for (int i = 0; i < etiquetas.size(); i++) {
 			add(etiquetas.get(i), c);
 			c.gridx++;
@@ -109,6 +138,7 @@ public class JPanelLlamada extends JPanelDato {
 		c.gridy++;
 		c.gridwidth = 4;
 		add(tabla, c);
+		mediador.setTabla(tabla);
 
 		mediador.actualizarColegas();
 	}
@@ -163,7 +193,7 @@ public class JPanelLlamada extends JPanelDato {
 	 */
 	@Override
 	public void actualizar() {
-		getModeloDeDatos().addLlamada(campoTexto.get(0).getText(),
+		getModeloDeDatos().addLlamada(comboId.getSelectedItem().toString(),
 				campoTexto.get(1).getText(), campoTexto.get(2).getText(),
 				campoTexto.get(3).getText(), campoTexto.get(4).getText());
 	}

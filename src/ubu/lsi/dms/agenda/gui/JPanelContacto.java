@@ -3,8 +3,11 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_CodPostal;
@@ -106,6 +109,47 @@ public class JPanelContacto extends JPanelDato {
 		campoTexto.add(new Campo_SoloDigitos(""));
 		campoTexto.add(new Campo_Notas(""));
 
+		c.gridx = 1;
+		c.gridy = 0;
+		comboId = new JComboBox<>();
+
+		for (Contacto con : getModeloDeDatos().getContactos()) {
+			comboId.addItem(con.getIdContacto());
+		}
+		comboId.setEditable(false);
+		comboId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				comboId.getSelectedItem();
+				for (Contacto c : getModeloDeDatos().getContactos()) {
+					if (c.getIdContacto() == (int) comboId.getSelectedItem()) {
+						campoTexto.get(1).setText(c.getNombre());
+						campoTexto.get(2).setText(c.getApellidos());
+						campoTexto.get(3).setText(c.getEstimado());
+						campoTexto.get(4).setText(c.getDireccion());
+						campoTexto.get(5).setText(c.getCiudad());
+						campoTexto.get(6).setText(c.getProv());
+						campoTexto.get(7).setText(c.getCodPostal());
+						campoTexto.get(8).setText(c.getRegion());
+						campoTexto.get(9).setText(c.getPais());
+						campoTexto.get(10).setText(c.getNombreCompania());
+						campoTexto.get(11).setText(c.getCargo());
+						campoTexto.get(12).setText(c.getTelefonoTrabajo());
+						campoTexto.get(13).setText(c.getExtensionTrabajo());
+						campoTexto.get(14).setText(c.getTelefonoMovil());
+						campoTexto.get(15).setText(c.getNumFax());
+						campoTexto.get(16).setText(c.getNomCorreoElectronico());
+						campoTexto.get(17).setText(
+								Integer.toString(c.getTipoContacto()
+										.getIdTipoContacto()));
+						campoTexto.get(18).setText(c.getNotas());
+						break;
+					}
+				}
+
+			}
+		});
+		mediador.setComboId(comboId);
+		add(comboId, c);
 		c.gridx = 0;
 		c.gridy = 0;
 		for (int i = 0; i < etiquetas.size(); i++) {
@@ -146,6 +190,7 @@ public class JPanelContacto extends JPanelDato {
 		c.gridy++;
 		c.gridwidth = 4;
 		add(tabla, c);
+		mediador.setTabla(tabla);
 
 		mediador.actualizarColegas();
 	}
@@ -211,7 +256,7 @@ public class JPanelContacto extends JPanelDato {
 	 */
 	@Override
 	public void actualizar() {
-		getModeloDeDatos().addContacto(campoTexto.get(0).getText(),
+		getModeloDeDatos().addContacto(comboId.getSelectedItem().toString(),
 				campoTexto.get(1).getText(), campoTexto.get(2).getText(),
 				campoTexto.get(3).getText(), campoTexto.get(4).getText(),
 				campoTexto.get(5).getText(), campoTexto.get(6).getText(),

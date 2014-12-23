@@ -3,17 +3,17 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
-import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaContacto;
 import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaTipoContacto;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
-import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 import ubu.lsi.dms.agenda.modelo.TipoContacto;
 
@@ -75,13 +75,37 @@ public class JPanelTipoContacto extends JPanelDato {
 
 		c.gridx = 1;
 		c.gridy = 0;
+		comboId = new JComboBox<>();
+
+		for (TipoContacto tc : getModeloDeDatos().getTiposContacto()) {
+			comboId.addItem(tc.getIdTipoContacto());
+		}
+		comboId.setEditable(false);
+		// MostrarCampos
+		comboId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				comboId.getSelectedItem();
+				for (TipoContacto c : getModeloDeDatos().getTiposContacto()) {
+					if (c.getIdTipoContacto() == (int) comboId
+							.getSelectedItem()) {
+						campoTexto.get(1).setText(c.getTipoContacto());
+						break;
+					}
+				}
+
+			}
+		});
+
+		mediador.setComboId(comboId);
+		add(comboId, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
 		add(campoTexto.get(0), c);
 
 		c.gridx = 1;
 		c.gridy = 1;
 		add(campoTexto.get(1), c);
-
-		// add(comboId);
 
 		c.gridx = 1;
 		c.gridy = 2;
@@ -97,6 +121,7 @@ public class JPanelTipoContacto extends JPanelDato {
 		c.gridy++;
 		c.gridwidth = 4;
 		add(tabla, c);
+		mediador.setTabla(tabla);
 
 		campoTexto.get(0).getDocument()
 				.addDocumentListener(new ListenerFormulario());
@@ -150,7 +175,8 @@ public class JPanelTipoContacto extends JPanelDato {
 	 */
 	@Override
 	public void actualizar() {
-		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(),
+		getModeloDeDatos().addTipoContacto(
+				comboId.getSelectedItem().toString(),
 				campoTexto.get(1).getText());
 	}
 }

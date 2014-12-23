@@ -13,11 +13,31 @@ import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaTipoContacto;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
+/**
+ * Panel perteneciente al panel tabulado de los formularios. Éste corresponde a los Tipos de Contacto.
+ * 
+ * @author Álvaro Ruiz Molledo
+ * @author Javier de la Fuente Barrios
+ * @author Jorge Alonso Márquez
+ *
+ */
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
 	
-	private String[] columnNames = {"Id", "Tipo"};
+	/**
+	 * Matriz con los nombres de las distinas columnas.
+	 * Cada uno corresponde a uno de los campos de Tipo de Contacto.
+	 */
+	private final String[] columnNames = {"Id", "Tipo"};
 	
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param mediador		Clase que se encarga de mediar entre los distintos "colegas" del panel.
+	 * @param operacion		Operación a realizar (que puede ser Insertar, Consultar o Actualizar según corresponda).
+	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 */
 	public JPanelTipoContacto(Mediador mediador, Operacion operacion,
 			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
@@ -74,18 +94,30 @@ public class JPanelTipoContacto extends JPanelDato {
 
 		mediador.actualizarColegas();
 	}
-
+	
+	
+	/**
+	 * Añade a la base de datos un Tipo de Contacto a partir de los datos introducidos en los textBox.
+	 */
 	@Override
 	public void insertar() {
 		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(),
 				campoTexto.get(1).getText());
 	}
-
+	
+	
+	/**
+	 * Muestra los datos de los Tipos de Contacto cuyos apellidos correspondan a los introducidos en el textBox correspondiente.
+	 */
 	@Override
 	public void consultar() {
 		getModeloDeDatos().getTiposContacto();
 	}
-
+	
+	
+	/**
+	 * Actualiza en la base de datos el Tipo de Contacto correspondiente a los datos introducidos en los textBox.
+	 */
 	@Override
 	public void actualizar() {
 		getModeloDeDatos().addTipoContacto(campoTexto.get(0).getText(),

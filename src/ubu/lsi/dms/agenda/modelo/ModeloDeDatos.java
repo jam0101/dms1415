@@ -1,23 +1,67 @@
 package ubu.lsi.dms.agenda.modelo;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Vector;
 
+/**
+ * Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+ * 
+ * @author Álvaro Ruiz Molledo
+ * @author Javier de la Fuente Barrios
+ * @author Jorge Alonso Márquez
+ *
+ */
 public class ModeloDeDatos {
-
+	
+	/**
+	 * Lista con los Contactos que estarían en la base de datos.
+	 */
 	private ArrayList<Contacto> contactos;
-	private ArrayList<Llamada> llamadas;
-	private ArrayList<TipoContacto> tiposContacto;
 
+	/**
+	 * Lista con las Llamadas que estarían en la base de datos.
+	 */
+	private ArrayList<Llamada> llamadas;
+
+	/**
+	 * Lista con los Tipos de Contacto que estarían en la base de datos.
+	 */
+	private ArrayList<TipoContacto> tiposContacto;
+	
+	
+	/**
+	 * Constructor de la clase.
+	 */
 	public ModeloDeDatos() {
 		contactos = new ArrayList<Contacto>();
 		llamadas = new ArrayList<Llamada>();
 		tiposContacto = new ArrayList<TipoContacto>();
 		inicializarValores();
 	}
+	
 
-	/** Añade un contacto, o, si la id ya existe, lo actualiza */
+	/**
+	 * Añade un Contacto, o, si la id ya existe, lo actualiza.
+	 *
+	 * @param id 				Id del Contacto.
+	 * @param nombre			Nombre del Contacto.
+	 * @param apellidos			Apellidos del Contacto.
+	 * @param estimado			Estimado.
+	 * @param direccion			Dirección del Contacto.
+	 * @param ciudad			Ciudad del Contacto.
+	 * @param prov				Provincia del Contacto.
+	 * @param codPostal			Código Postal del Contacto.
+	 * @param region			Región del Contacto.
+	 * @param pais				País del Contacto.
+	 * @param nombreCompania	Nombre de la compañía del Contacto.
+	 * @param cargo				Cargo del Contacto.
+	 * @param telfTrabajo		Teléfono de trabajo del Contacto.
+	 * @param extensionTrabajo	Extensión del trabajo del Contacto.
+	 * @param telfMovil			Teléfono móvil del Contacto.
+	 * @param numFax			Número de fax del Contacto.
+	 * @param email				E-mail del Contacto.
+	 * @param idTipoContacto	Id del Tipo de Contacto del Contacto.
+	 * @param notas				Otras notas.
+	 */
 	public void addContacto(String id, String nombre, String apellidos,
 			String estimado, String direccion, String ciudad, String prov,
 			String codPostal, String region, String pais,
@@ -66,8 +110,17 @@ public class ModeloDeDatos {
 				extensionTrabajo, telfMovil, numFax, email, notas, tc);
 		contactos.add(contacto);
 	}
-
-	/** Añade una llamada, o, si la id ya existe, lo actualiza */
+	
+	
+	/**
+	 *  Añade una Llamada, o, si la id ya existe, lo actualiza.
+	 *  
+	 * @param id			Id de la Llamada.
+	 * @param idContacto	Id del Contacto asociado a la Llamada.
+	 * @param fechaLlamada	Fecha de la Llamada.
+	 * @param asunto		Asunto de la Llamada.
+	 * @param notas			Otras notas.
+	 */
 	public void addLlamada(String id, String idContacto, String fechaLlamada,
 			String asunto, String notas) {
 		Contacto contacto = null;
@@ -94,8 +147,14 @@ public class ModeloDeDatos {
 				fechaLlamada, asunto, notas);
 		llamadas.add(llamada);
 	}
-
-	/** Añade un tipo de contacto, o, si la id ya existe, lo actualiza */
+	
+	
+	/**
+	 * Añade un Tipo de Contacto, o, si la id ya existe, lo actualiza.
+	 * 
+	 * @param id	Id del Tipo de Contacto.
+	 * @param tipo	Tipo.
+	 */
 	public void addTipoContacto(String id, String tipo) {
 		for (TipoContacto tc : tiposContacto) {
 			if (Integer.parseInt(id) == tc.getIdTipoContacto()) {
@@ -108,19 +167,41 @@ public class ModeloDeDatos {
 		TipoContacto tipoContacto = new TipoContacto(Integer.parseInt(id), tipo);
 		tiposContacto.add(tipoContacto);
 	}
-
+	
+	
+	/**
+	 * Devuelve la lista de Contactos.
+	 * 
+	 * @return contactos
+	 */
 	public ArrayList<Contacto> getContactos() {
 		return contactos;
 	}
-
+	
+	
+	/**
+	 * Devuelve la lista de Llamadas.
+	 * 
+	 * @return llamadas
+	 */
 	public ArrayList<Llamada> getLlamadas() {
 		return llamadas;
 	}
-
+	
+	
+	/**
+	 * Devuelve la lista de Tipos de Contacto.
+	 * 
+	 * @return tiposContacto
+	 */
 	public ArrayList<TipoContacto> getTiposContacto() {
 		return tiposContacto;
 	}
-
+	
+	
+	/**
+	 * Crea unos valores por defectos para la base de datos con los que poder trabajar.
+	 */
 	private void inicializarValores() {
 		TipoContacto tc1 = new TipoContacto(1, "alumno");
 		TipoContacto tc2 = new TipoContacto(2, "profesor");

@@ -16,11 +16,31 @@ import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaLlamada;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
+/**
+ * Panel perteneciente al panel tabulado de los formularios. Éste corresponde a las Llamadas.
+ * 
+ * @author Álvaro Ruiz Molledo
+ * @author Javier de la Fuente Barrios
+ * @author Jorge Alonso Márquez
+ *
+ */
 @SuppressWarnings("serial")
 public class JPanelLlamada extends JPanelDato {
 	
-	private String[] columnNames = {"Id", "Contacto", "Fecha", "Asunto", "Notas"};
+	/**
+	 * Matriz con los nombres de las distinas columnas.
+	 * Cada uno corresponde a uno de los campos de Llamada.
+	 */
+	private final String[] columnNames = {"Id", "Contacto", "Fecha", "Asunto", "Notas"};
 	
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param mediador		Clase que se encarga de mediar entre los distintos "colegas" del panel.
+	 * @param operacion		Operación a realizar (que puede ser Insertar, Consultar o Actualizar según corresponda).
+	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 */
 	public JPanelLlamada(Mediador mediador, Operacion operacion,
 			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
@@ -81,20 +101,32 @@ public class JPanelLlamada extends JPanelDato {
 
 		mediador.actualizarColegas();
 	}
-
+	
+	
+	/**
+	 * Añade a la base de datos una Llamada a partir de los datos introducidos en los textBox.
+	 */
 	@Override
 	public void insertar() {
 		getModeloDeDatos().addLlamada(campoTexto.get(0).getText(),
 				campoTexto.get(1).getText(), campoTexto.get(2).getText(),
 				campoTexto.get(3).getText(), campoTexto.get(4).getText());
 	}
-
+	
+	
+	/**
+	 * Muestra los datos de las Llamadas cuyos apellidos correspondan a los introducidos en el textBox correspondiente.
+	 */
 	@Override
 	public void consultar() {
 		getModeloDeDatos().getLlamadas();
 		// TODO
 	}
-
+	
+	
+	/**
+	 * Actualiza en la base de datos la Llamada correspondiente a los datos introducidos en los textBox.
+	 */
 	@Override
 	public void actualizar() {
 		getModeloDeDatos().addLlamada(campoTexto.get(0).getText(),

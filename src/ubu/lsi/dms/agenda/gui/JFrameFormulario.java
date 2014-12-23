@@ -18,16 +18,51 @@ import ubu.lsi.dms.agenda.gui.mediador.Mediador;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
+/**
+ * Frame que contiene un panel tabulado de formulario.
+ * 
+ * @author Álvaro Ruiz Molledo
+ * @author Javier de la Fuente Barrios
+ * @author Jorge Alonso Márquez
+ *
+ */
 @SuppressWarnings("serial")
 public class JFrameFormulario extends JFrame {
-
+	
+	/**
+	 * Panel tabulado de formulario.
+	 */
 	JTabbedPane tabbedPane = new JTabbedPane();
+	
+	/**
+	 * Primera pestaña del panel tabulado, correspondiente a los Contactos.
+	 */
 	JPanelContacto panelContacto;
+	
+	/**
+	 * Segunda pestaña del panel tabulado, correspondiente a las Llamadas.
+	 */
 	JPanelLlamada panelLlamada;
+	
+	/**
+	 * Tercera pestaña del panel tabulado, correspondiente a los Tipos de Contacto.
+	 */
 	JPanelTipoContacto panelTipoContacto;
 	
+	/**
+	 * Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 */
 	private ModeloDeDatos modeloDeDatos;
-
+	
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param nombre		Nombre del frame.
+	 * @param mediador		Mediador que corresponde a la clase de operación asignada a este frame.
+	 * @param operacion		Operación asignada a este frame.
+	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 */
 	public JFrameFormulario(String nombre, Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
 		super(nombre);
 		this.modeloDeDatos = modeloDeDatos;
@@ -49,11 +84,21 @@ public class JFrameFormulario extends JFrame {
 		inicializacionComponentes();
 		
 	}
-
+	
+	
+	/**
+	 * Devuelve el panel tabulado.
+	 * 
+	 * @return tabbedPane
+	 */
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
-
+	
+	
+	/**
+	 * Inicializa los componentes gráficos del frame.
+	 */
 	public void inicializacionComponentes() {
 		Container contentpane = getContentPane();
 
@@ -76,9 +121,18 @@ public class JFrameFormulario extends JFrame {
 		contentpane.add(botonCerrar);
 		contentpane.setBackground(new Color(32, 90, 130));
 	}
+	
 
+	/**
+	 *	Listener correspondiente al botón Cerrar
+	 */
 	private class EscuchadorBotonCerrar extends MouseAdapter {
-
+		
+		/**
+		 * Cierra el frame actual y abre el frame del menú principal.
+		 * 
+		 * @param e Evento
+		 */
 		@Override
 		public void mouseClicked(MouseEvent evento) {
 			JFrameFormulario.this.dispose();

@@ -3,10 +3,7 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -22,16 +19,36 @@ import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
+/**
+ * Panel perteneciente al panel tabulado de los formularios. Éste corresponde a los Contactos.
+ * 
+ * @author Álvaro Ruiz Molledo
+ * @author Javier de la Fuente Barrios
+ * @author Jorge Alonso Márquez
+ *
+ */
 @SuppressWarnings("serial")
 public class JPanelContacto extends JPanelDato {
 	
-	private String[] columnNames = {"Id", "Nombre", "Apellidos", "Estimado",
+	/**
+	 * Matriz con los nombres de las distinas columnas.
+	 * Cada uno corresponde a uno de los campos de Contacto.
+	 */
+	private final String[] columnNames = {"Id", "Nombre", "Apellidos", "Estimado",
 			"Direccion", "Ciudad", "Prov", "Codigo postal", "Region",
 			"Pais", "Nombre de la compania", "Cargo",
 			"Telefono del trabajo", "Extension del trabajo",
 			"Telefono movil", "Numero de fax", "E-mail",
 			"Tipo de Contacto", "Notas"};
 	
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param mediador		Clase que se encarga de mediar entre los distintos "colegas" del panel.
+	 * @param operacion		Operación a realizar (que puede ser Insertar, Consultar o Actualizar según corresponda).
+	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 */
 	public JPanelContacto(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
 
@@ -118,7 +135,11 @@ public class JPanelContacto extends JPanelDato {
 
 		mediador.actualizarColegas();
 	}
-
+	
+	
+	/**
+	 * Añade a la base de datos un Contacto a partir de los datos introducidos en los textBox.
+	 */
 	@Override
 	public void insertar() {
 		getModeloDeDatos().addContacto(campoTexto.get(0).getText(),
@@ -132,7 +153,11 @@ public class JPanelContacto extends JPanelDato {
 				campoTexto.get(15).getText(), campoTexto.get(16).getText(),
 				campoTexto.get(17).getText(), campoTexto.get(18).getText());
 	}
-
+	
+	
+	/**
+	 * Muestra los datos de los Contactos cuyos apellidos correspondan a los introducidos en el textBox correspondiente.
+	 */
 	@Override
 	public void consultar() {
 		ArrayList<Contacto> contactosAMostrar = new ArrayList<Contacto>();
@@ -151,7 +176,11 @@ public class JPanelContacto extends JPanelDato {
 		
 		
 	}
-
+	
+	
+	/**
+	 * Actualiza en la base de datos el Contacto correspondiente a los datos introducidos en los textBox.
+	 */
 	@Override
 	public void actualizar() {
 		getModeloDeDatos().addContacto(campoTexto.get(0).getText(),

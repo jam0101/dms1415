@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
-import javax.swing.JScrollPane;
+
 import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_CodPostal;
@@ -20,7 +20,8 @@ import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 /**
- * Panel perteneciente al panel tabulado de los formularios. Éste corresponde a los Contactos.
+ * Panel perteneciente al panel tabulado de los formularios. Éste corresponde a
+ * los Contactos.
  * 
  * @author Álvaro Ruiz Molledo
  * @author Javier de la Fuente Barrios
@@ -29,27 +30,32 @@ import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
  */
 @SuppressWarnings("serial")
 public class JPanelContacto extends JPanelDato {
-	
+
 	/**
-	 * Matriz con los nombres de las distinas columnas.
-	 * Cada uno corresponde a uno de los campos de Contacto.
+	 * Matriz con los nombres de las distinas columnas. Cada uno corresponde a
+	 * uno de los campos de Contacto.
 	 */
-	private final String[] columnNames = {"Id", "Nombre", "Apellidos", "Estimado",
-			"Direccion", "Ciudad", "Prov", "Codigo postal", "Region",
-			"Pais", "Nombre de la compania", "Cargo",
-			"Telefono del trabajo", "Extension del trabajo",
-			"Telefono movil", "Numero de fax", "E-mail",
-			"Tipo de Contacto", "Notas"};
-	
-	
+	private final String[] columnNames = { "Id", "Nombre", "Apellidos",
+			"Estimado", "Direccion", "Ciudad", "Prov", "Codigo postal",
+			"Region", "Pais", "Nombre de la compania", "Cargo",
+			"Telefono del trabajo", "Extension del trabajo", "Telefono movil",
+			"Numero de fax", "E-mail", "Tipo de Contacto", "Notas" };
+
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @param mediador		Clase que se encarga de mediar entre los distintos "colegas" del panel.
-	 * @param operacion		Operación a realizar (que puede ser Insertar, Consultar o Actualizar según corresponda).
-	 * @param modeloDeDatos	Clase de datos que contiene los datos sobre los que trabaja la aplicación.
+	 * @param mediador
+	 *            Clase que se encarga de mediar entre los distintos "colegas"
+	 *            del panel.
+	 * @param operacion
+	 *            Operación a realizar (que puede ser Insertar, Consultar o
+	 *            Actualizar según corresponda).
+	 * @param modeloDeDatos
+	 *            Clase de datos que contiene los datos sobre los que trabaja la
+	 *            aplicación.
 	 */
-	public JPanelContacto(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
+	public JPanelContacto(Mediador mediador, Operacion operacion,
+			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
 
 		setLayout(new GridBagLayout());
@@ -120,25 +126,33 @@ public class JPanelContacto extends JPanelDato {
 		c.gridx++;
 		c.gridy++;
 		add(botonAceptar, c);
-		
-		
-		modeloDeTabla = new ModeloDeLaTablaContacto(columnNames, getModeloDeDatos().getContactos());
+
+		modeloDeTabla = new ModeloDeLaTablaContacto(columnNames,
+				getModeloDeDatos().getContactos());
 		tabla = new JTable(modeloDeTabla);
-	    scrollPaneTabla = new JScrollPane(tabla);
-	    scrollPaneTabla.setVisible(false);
-	    mediador.setScrollPaneTabla(scrollPaneTabla);
-		
+		tabla.getColumnModel().getColumn(0).setMaxWidth(5);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
+
+		for (int i = 3; i < etiquetas.size(); i++) {
+			if (i != 12 && i != 6 && i != 8) {
+				tabla.getColumnModel().getColumn(i).setPreferredWidth(0);
+				tabla.getColumnModel().getColumn(i).setMinWidth(0);
+				tabla.getColumnModel().getColumn(i).setMaxWidth(0);
+			}
+		}
+
 		c.gridx = 0;
 		c.gridy++;
 		c.gridwidth = 4;
-		add(scrollPaneTabla, c);
+		add(tabla, c);
 
 		mediador.actualizarColegas();
 	}
-	
-	
+
 	/**
-	 * Añade a la base de datos un Contacto a partir de los datos introducidos en los textBox.
+	 * Añade a la base de datos un Contacto a partir de los datos introducidos
+	 * en los textBox.
 	 */
 	@Override
 	public void insertar() {
@@ -153,33 +167,34 @@ public class JPanelContacto extends JPanelDato {
 				campoTexto.get(15).getText(), campoTexto.get(16).getText(),
 				campoTexto.get(17).getText(), campoTexto.get(18).getText());
 	}
-	
-	
+
 	/**
-	 * Muestra los datos de los Contactos cuyos apellidos correspondan a los introducidos en el textBox correspondiente.
+	 * Muestra los datos de los Contactos cuyos apellidos correspondan a los
+	 * introducidos en el textBox correspondiente.
 	 */
 	@Override
 	public void consultar() {
 		ArrayList<Contacto> contactosAMostrar = new ArrayList<Contacto>();
-		
-		for(Contacto c : getModeloDeDatos().getContactos()){
-			
-			if(c.getApellidos().equals(campoTexto.get(1).getText())){
+
+		for (Contacto c : getModeloDeDatos().getContactos()) {
+
+			if (c.getApellidos().equals(campoTexto.get(1).getText())) {
 				System.out.println(c.getApellidos() + " existe");
 				contactosAMostrar.add(c);
 			} else {
-				System.out.println("No existe: " + c.getApellidos() + " es distinto de " + campoTexto.get(2).getText());
+				System.out.println("No existe: " + c.getApellidos()
+						+ " es distinto de " + campoTexto.get(2).getText());
 			}
-			
-			//TODO: Actualizar la tabla para que muestre los contactos existentes en contactosAMostrar
+
+			// TODO: Actualizar la tabla para que muestre los contactos
+			// existentes en contactosAMostrar
 		}
-		
-		
+
 	}
-	
-	
+
 	/**
-	 * Actualiza en la base de datos el Contacto correspondiente a los datos introducidos en los textBox.
+	 * Actualiza en la base de datos el Contacto correspondiente a los datos
+	 * introducidos en los textBox.
 	 */
 	@Override
 	public void actualizar() {

@@ -90,15 +90,17 @@ public class JPanelLlamada extends JPanelDato {
 		
 		modeloDeTabla = new ModeloDeLaTablaLlamada(columnNames, getModeloDeDatos().getLlamadas());
 		tabla = new JTable(modeloDeTabla);
-	    scrollPaneTabla = new JScrollPane(tabla);
-	    scrollPaneTabla.setVisible(false);
-	    mediador.setScrollPaneTabla(scrollPaneTabla);
-	    
+		tabla.getColumnModel().getColumn(0).setMaxWidth(35);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(120);
+		tabla.getColumnModel().getColumn(3).setMaxWidth(60);
+		tabla.getColumnModel().getColumn(4).setPreferredWidth(150);
+		
 		c.gridx = 0;
 		c.gridy++;
 		c.gridwidth = 4;
-		add(scrollPaneTabla, c);
-
+		add(tabla, c);
+		
 		mediador.actualizarColegas();
 	}
 	

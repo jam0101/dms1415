@@ -69,12 +69,6 @@ public abstract class JPanelDato extends JPanel {
 	 * Tabla que se mostrará en los formularios de Consulta.
 	 */
 	protected JTable tabla;
-
-	/**
-	 * Scrollpane que contiene la tabla que se mostrará en los formularios de Consulta.
-	 * Se ocultará en los otros tipos de formulario.
-	 */
-	protected JScrollPane scrollPaneTabla;
 	
 	/**
 	 * Clase que se encarga de mediar entre los distintos "colegas" del panel.

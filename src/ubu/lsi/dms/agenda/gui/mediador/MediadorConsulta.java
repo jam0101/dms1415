@@ -46,7 +46,6 @@ public class MediadorConsulta extends Mediador {
 				getCamposTexto().get(i).setVisible(false);
 			}
 		}
-		getScrollPaneTabla().setVisible(true);
 		
 		boolean todosLosCamposEstanCorrectos = true;
 		for (CampoTexto campo : getCamposTexto()) {

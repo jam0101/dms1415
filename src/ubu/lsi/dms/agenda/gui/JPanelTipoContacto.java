@@ -80,14 +80,13 @@ public class JPanelTipoContacto extends JPanelDato {
 		
 		modeloDeTabla = new ModeloDeLaTablaTipoContacto(columnNames, getModeloDeDatos().getTiposContacto());
 		tabla = new JTable(modeloDeTabla);
-	    scrollPaneTabla = new JScrollPane(tabla);
-	    scrollPaneTabla.setVisible(false);
-	    mediador.setScrollPaneTabla(scrollPaneTabla);
-	    
+		tabla.getColumnModel().getColumn(0).setMaxWidth(5);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(25);
+		
 		c.gridx = 0;
 		c.gridy++;
 		c.gridwidth = 4;
-		add(scrollPaneTabla, c);
+		add(tabla, c);
 		
 		campoTexto.get(0).getDocument().addDocumentListener(new ListenerFormulario());
 		campoTexto.get(1).getDocument().addDocumentListener(new ListenerFormulario());

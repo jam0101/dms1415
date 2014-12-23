@@ -178,17 +178,30 @@ public class JPanelContacto extends JPanelDato {
 
 		for (Contacto c : getModeloDeDatos().getContactos()) {
 
-			if (c.getApellidos().equals(campoTexto.get(1).getText())) {
+			if (c.getApellidos().equals(campoTexto.get(2).getText())) {
 				System.out.println(c.getApellidos() + " existe");
 				contactosAMostrar.add(c);
 			} else {
 				System.out.println("No existe: " + c.getApellidos()
 						+ " es distinto de " + campoTexto.get(2).getText());
 			}
-
-			// TODO: Actualizar la tabla para que muestre los contactos
-			// existentes en contactosAMostrar
 		}
+		modeloDeTabla = new ModeloDeLaTablaContacto(columnNames,
+				contactosAMostrar);
+		tabla.setModel(modeloDeTabla);
+
+		tabla.getColumnModel().getColumn(0).setMaxWidth(5);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
+
+		for (int i = 3; i < etiquetas.size(); i++) {
+			if (i != 12 && i != 6 && i != 8) {
+				tabla.getColumnModel().getColumn(i).setPreferredWidth(0);
+				tabla.getColumnModel().getColumn(i).setMinWidth(0);
+				tabla.getColumnModel().getColumn(i).setMaxWidth(0);
+			}
+		}
+		modeloDeTabla.fireTableDataChanged();
 
 	}
 

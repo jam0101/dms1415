@@ -4,16 +4,20 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaTipoContacto;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JPanelTipoContacto extends JPanelDato {
-
+	
+	private String[] columnNames = {"Id", "Tipo"};
+	
 	public JPanelTipoContacto(Mediador mediador, Operacion operacion,
 			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
@@ -52,11 +56,21 @@ public class JPanelTipoContacto extends JPanelDato {
 		c.gridx = 1;
 		c.gridy = 2;
 		add(botonAceptar, c);
-
-		campoTexto.get(0).getDocument()
-				.addDocumentListener(new ListenerFormulario());
-		campoTexto.get(1).getDocument()
-				.addDocumentListener(new ListenerFormulario());
+		
+		
+		modeloDeTabla = new ModeloDeLaTablaTipoContacto(columnNames, getModeloDeDatos().getTiposContacto());
+		tabla = new JTable(modeloDeTabla);
+	    scrollPaneTabla = new JScrollPane(tabla);
+	    scrollPaneTabla.setVisible(false);
+	    mediador.setScrollPaneTabla(scrollPaneTabla);
+	    
+		c.gridx = 0;
+		c.gridy++;
+		c.gridwidth = 4;
+		add(scrollPaneTabla, c);
+		
+		campoTexto.get(0).getDocument().addDocumentListener(new ListenerFormulario());
+		campoTexto.get(1).getDocument().addDocumentListener(new ListenerFormulario());
 
 		mediador.actualizarColegas();
 	}

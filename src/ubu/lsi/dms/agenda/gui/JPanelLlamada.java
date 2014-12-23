@@ -4,17 +4,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Fecha;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Notas;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloLetras;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaLlamada;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JPanelLlamada extends JPanelDato {
-
+	
+	private String[] columnNames = {"Id", "Contacto", "Fecha", "Asunto", "Notas"};
+	
 	public JPanelLlamada(Mediador mediador, Operacion operacion,
 			ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
@@ -60,6 +66,18 @@ public class JPanelLlamada extends JPanelDato {
 		c.gridx++;
 		c.gridy++;
 		add(botonAceptar, c);
+		
+		
+		modeloDeTabla = new ModeloDeLaTablaLlamada(columnNames, getModeloDeDatos().getLlamadas());
+		tabla = new JTable(modeloDeTabla);
+	    scrollPaneTabla = new JScrollPane(tabla);
+	    scrollPaneTabla.setVisible(false);
+	    mediador.setScrollPaneTabla(scrollPaneTabla);
+	    
+		c.gridx = 0;
+		c.gridy++;
+		c.gridwidth = 4;
+		add(scrollPaneTabla, c);
 
 		mediador.actualizarColegas();
 	}

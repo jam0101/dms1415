@@ -8,14 +8,11 @@ public class MediadorActualizar extends Mediador {
 	public void actualizarColegas() {
 		boolean todosLosCamposEstanCorrectos = true;
 		
-//		if(getComboId().hayAlgoSeleccionado()){
-//			getBotonAceptar().setEnabled(true);
-//		} else {
-//			getBotonAceptar().setEnabled(false);
-//		}
-		
 		for(CampoTexto campo : getCamposTexto()){
 			if(!campo.estaCorrecto()){
+				if(!campo.getText().equals("")){
+					System.err.println(campo.getText() + " no es un valor correcto.");
+				}
 				todosLosCamposEstanCorrectos = false;
 			}
 		}

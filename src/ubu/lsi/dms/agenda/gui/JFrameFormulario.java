@@ -36,6 +36,7 @@ public class JFrameFormulario extends JFrame {
 		setLayout(new FlowLayout());
 		setSize(950, 610);
 		setMinimumSize(new Dimension(950, 610));
+//		setMinimumSize(new Dimension(950, 1020));
 		// Para que aparezca centrado
 		setLocationRelativeTo(null);
 

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -19,19 +20,23 @@ import javax.swing.event.DocumentListener;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.CampoTexto;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTabla;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public abstract class JPanelDato extends JPanel {
 
-	protected JComboBox<Integer> comboId;
 	protected ArrayList<CampoTexto> campoTexto;
 	protected ArrayList<JLabel> etiquetas;
 	protected JButton botonAceptar;
 	private Operacion operacion;
 	private ModeloDeDatos modeloDeDatos;
-
+	
+	protected ModeloDeLaTabla modeloDeTabla;
+	protected JTable tabla;
+	protected JScrollPane scrollPaneTabla;
+	
 	protected Mediador mediador;
 
 	public JPanelDato(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
@@ -39,14 +44,12 @@ public abstract class JPanelDato extends JPanel {
 		this.setModeloDeDatos(modeloDeDatos);
 		
 		etiquetas = new ArrayList<>();
-		comboId = new JComboBox<>();
-		campoTexto = new ArrayList<>();
+		campoTexto = new ArrayList<>();	
 		botonAceptar = crearButton("Aceptar");
-
+		
 		setBackground(new Color(32, 90, 130));
 
 		this.mediador = mediador;
-		this.mediador.setComboId(comboId);
 		this.mediador.setCamposTexto(campoTexto);
 		this.mediador.setBotonAceptar(botonAceptar);
 		
@@ -105,19 +108,16 @@ public abstract class JPanelDato extends JPanel {
 		@Override
 		public void changedUpdate(DocumentEvent arg0) {
 			mediador.actualizarColegas();
-			// System.out.println("changedUpdate");
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent arg0) {
 			mediador.actualizarColegas();
-			// System.out.println("insertUpdate");
 		}
 
 		@Override
 		public void removeUpdate(DocumentEvent arg0) {
 			mediador.actualizarColegas();
-			// System.out.println("removeUpdate");
 		}
 	}
 	

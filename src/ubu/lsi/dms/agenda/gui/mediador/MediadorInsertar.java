@@ -8,8 +8,6 @@ public class MediadorInsertar extends Mediador {
 	public void actualizarColegas() {
 		boolean todosLosCamposEstanCorrectos = true;
 		
-		getComboId().setEnabled(false);
-		
 		for(CampoTexto campo : getCamposTexto()){
 			if(!campo.estaCorrecto()){
 				if(!campo.getText().equals("")){

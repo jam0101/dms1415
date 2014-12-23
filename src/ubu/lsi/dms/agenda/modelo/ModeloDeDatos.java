@@ -1,18 +1,19 @@
 package ubu.lsi.dms.agenda.modelo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
 public class ModeloDeDatos {
 
-	private Collection<Contacto> contactos;
-	private Collection<Llamada> llamadas;
-	private Collection<TipoContacto> tiposContacto;
+	private ArrayList<Contacto> contactos;
+	private ArrayList<Llamada> llamadas;
+	private ArrayList<TipoContacto> tiposContacto;
 
 	public ModeloDeDatos() {
-		contactos = new Vector<Contacto>();
-		llamadas = new Vector<Llamada>();
-		tiposContacto = new Vector<TipoContacto>();
+		contactos = new ArrayList<Contacto>();
+		llamadas = new ArrayList<Llamada>();
+		tiposContacto = new ArrayList<TipoContacto>();
 		inicializarValores();
 	}
 
@@ -102,21 +103,21 @@ public class ModeloDeDatos {
 				return;
 			}
 		}
-
+		
 		// Insertar
 		TipoContacto tipoContacto = new TipoContacto(Integer.parseInt(id), tipo);
 		tiposContacto.add(tipoContacto);
 	}
 
-	public Collection<Contacto> getContactos() {
+	public ArrayList<Contacto> getContactos() {
 		return contactos;
 	}
 
-	public Collection<Llamada> getLlamadas() {
+	public ArrayList<Llamada> getLlamadas() {
 		return llamadas;
 	}
 
-	public Collection<TipoContacto> getTiposContacto() {
+	public ArrayList<TipoContacto> getTiposContacto() {
 		return tiposContacto;
 	}
 

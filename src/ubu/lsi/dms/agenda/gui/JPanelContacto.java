@@ -3,6 +3,12 @@ package ubu.lsi.dms.agenda.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.ScrollPane;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_CodPostal;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Direccion;
@@ -11,14 +17,22 @@ import ubu.lsi.dms.agenda.gui.campoTexto.Campo_Notas;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloDigitos;
 import ubu.lsi.dms.agenda.gui.campoTexto.Campo_SoloLetras;
 import ubu.lsi.dms.agenda.gui.mediador.Mediador;
+import ubu.lsi.dms.agenda.gui.modeloDeLaTabla.ModeloDeLaTablaContacto;
 import ubu.lsi.dms.agenda.gui.operacion.Operacion;
+import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.ModeloDeDatos;
 
 @SuppressWarnings("serial")
 public class JPanelContacto extends JPanelDato {
-
-	public JPanelContacto(Mediador mediador, Operacion operacion,
-			ModeloDeDatos modeloDeDatos) {
+	
+	private String[] columnNames = {"Id", "Nombre", "Apellidos", "Estimado",
+			"Direccion", "Ciudad", "Prov", "Codigo postal", "Region",
+			"Pais", "Nombre de la compania", "Cargo",
+			"Telefono del trabajo", "Extension del trabajo",
+			"Telefono movil", "Numero de fax", "E-mail",
+			"Tipo de Contacto", "Notas"};
+	
+	public JPanelContacto(Mediador mediador, Operacion operacion, ModeloDeDatos modeloDeDatos) {
 		super(mediador, operacion, modeloDeDatos);
 
 		setLayout(new GridBagLayout());
@@ -89,9 +103,20 @@ public class JPanelContacto extends JPanelDato {
 		c.gridx++;
 		c.gridy++;
 		add(botonAceptar, c);
+		
+		
+		modeloDeTabla = new ModeloDeLaTablaContacto(columnNames, getModeloDeDatos().getContactos());
+		tabla = new JTable(modeloDeTabla);
+	    scrollPaneTabla = new JScrollPane(tabla);
+	    scrollPaneTabla.setVisible(false);
+	    mediador.setScrollPaneTabla(scrollPaneTabla);
+		
+		c.gridx = 0;
+		c.gridy++;
+		c.gridwidth = 4;
+		add(scrollPaneTabla, c);
 
 		mediador.actualizarColegas();
-
 	}
 
 	@Override
@@ -110,8 +135,21 @@ public class JPanelContacto extends JPanelDato {
 
 	@Override
 	public void consultar() {
-		getModeloDeDatos().getContactos();
-		// TODO
+		ArrayList<Contacto> contactosAMostrar = new ArrayList<Contacto>();
+		
+		for(Contacto c : getModeloDeDatos().getContactos()){
+			
+			if(c.getApellidos().equals(campoTexto.get(1).getText())){
+				System.out.println(c.getApellidos() + " existe");
+				contactosAMostrar.add(c);
+			} else {
+				System.out.println("No existe: " + c.getApellidos() + " es distinto de " + campoTexto.get(2).getText());
+			}
+			
+			//TODO: Actualizar la tabla para que muestre los contactos existentes en contactosAMostrar
+		}
+		
+		
 	}
 
 	@Override
